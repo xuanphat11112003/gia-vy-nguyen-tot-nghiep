@@ -35,3 +35,4 @@ Dự án thiệp mời và kỷ niệm tốt nghiệp được viết hoàn toà
 - **Tên người tốt nghiệp:** Mở file `index.html` và tìm thẻ `<p class="intro-recipient">Nguyễn Gia Vy</p>` hoặc `<h3 class="grad-name">Nguyễn Gia Vy</h3>` để đổi thành tên mong muốn.
 - **Thời gian & Địa điểm:** Chỉnh sửa trong phần `<div class="info-grid">...</div>` trong `index.html`.
 - **Tông màu chủ đạo:** Mở file `style.css`, bạn có thể thay đổi các biến màu ở phần `:root` như `--pink-sky-mid`, `--pink-deep`, `--gold-warm`.
+

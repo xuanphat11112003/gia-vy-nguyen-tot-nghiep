@@ -1,15 +1,11 @@
 /**
- * GRADUATION INVITATION INTRO - PURE JS
- * - Interactive Canvas Falling Cherry Blossom Petals
- * - Golden Fairy Dust / Sparkles
- * - Touch & Click Petal Burst Effect
- * - Modal Open/Close & Branch Animation Replay
- * - Web Audio API Ambient Chimes
+ * GRADUATION INVITATION INTRO - MOBILE FIRST SAKURA EXPERIENCE
+ * Pure JavaScript - No dependencies
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ========================================================
-     1. CANVAS SETUP FOR PETALS & SPARKLES
+     1. CANVAS SETUP FOR FLOATING PETALS & FAIRY DUST
      ======================================================== */
   const canvas = document.getElementById('petalCanvas');
   const ctx = canvas.getContext('2d');
@@ -17,28 +13,33 @@ document.addEventListener('DOMContentLoaded', () => {
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
 
-  window.addEventListener('resize', () => {
+  function resizeCanvas() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('orientationchange', () => {
+    setTimeout(resizeCanvas, 150);
   });
 
-  // Petal & Sparkle Configuration
-  const PETAL_COUNT = window.innerWidth < 600 ? 35 : 65;
-  const SPARKLE_COUNT = 30;
+  // Adjust particle count for mobile vs desktop
+  const isMobile = window.innerWidth < 768;
+  const PETAL_COUNT = isMobile ? 32 : 55;
+  const SPARKLE_COUNT = isMobile ? 22 : 40;
+
   const petals = [];
   const sparkles = [];
-  const burstParticles = [];
+  const bursts = [];
 
-  // Petal Color Palettes (Soft pastel pinks & rose)
-  const petalColors = [
-    'rgba(255, 182, 193, ', // Light Pink
-    'rgba(255, 192, 203, ', // Pink
-    'rgba(255, 160, 185, ', // Rose Pink
-    'rgba(255, 218, 224, ', // Blush Pink
-    'rgba(248, 187, 208, '  // Cherry Blossom Pink
+  // Soft Sakura Petal Colors
+  const petalPalettes = [
+    { base: '255, 182, 193', tip: '255, 235, 240' }, // Classic Light Pink
+    { base: '255, 160, 185', tip: '255, 220, 230' }, // Rose Pink
+    { base: '248, 187, 208', tip: '255, 245, 248' }, // Sakura Soft
+    { base: '255, 192, 203', tip: '255, 255, 255' }  // White Blush
   ];
 
-  class Petal {
+  class SakuraPetal {
     constructor(isBurst = false, originX = 0, originY = 0) {
       this.reset(isBurst, originX, originY);
     }
@@ -48,34 +49,34 @@ document.addEventListener('DOMContentLoaded', () => {
         this.x = originX;
         this.y = originY;
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 4 + 2;
+        const speed = Math.random() * 4.5 + 2.5;
         this.vx = Math.cos(angle) * speed;
         this.vy = Math.sin(angle) * speed - 1.5;
         this.isBurst = true;
         this.life = 1;
-        this.decay = Math.random() * 0.012 + 0.008;
+        this.decay = Math.random() * 0.015 + 0.01;
       } else {
-        this.x = Math.random() * (width + 100) - 50;
-        this.y = Math.random() * -height;
-        this.vx = Math.random() * 1.5 - 0.75;
-        this.vy = Math.random() * 1.2 + 1;
+        this.x = Math.random() * (width + 80) - 40;
+        this.y = Math.random() * -height * 0.8;
+        this.vx = Math.random() * 1.2 - 0.6;
+        this.vy = Math.random() * 1.3 + 0.9;
         this.isBurst = false;
         this.life = 1;
       }
 
-      this.size = Math.random() * 9 + 8;
-      this.colorBase = petalColors[Math.floor(Math.random() * petalColors.length)];
-      this.opacity = Math.random() * 0.45 + 0.55;
+      this.size = Math.random() * 8 + 8; // 8px to 16px
+      this.palette = petalPalettes[Math.floor(Math.random() * petalPalettes.length)];
+      this.opacity = Math.random() * 0.35 + 0.65;
 
       // 3D rotation angles
       this.angle = Math.random() * Math.PI * 2;
-      this.angularSpeed = (Math.random() - 0.5) * 0.02;
+      this.angularSpeed = (Math.random() - 0.5) * 0.025;
       this.flipAngle = Math.random() * Math.PI * 2;
-      this.flipSpeed = Math.random() * 0.03 + 0.015;
+      this.flipSpeed = Math.random() * 0.035 + 0.02;
 
-      // Wind sway
+      // Wind oscillation
       this.swayAngle = Math.random() * Math.PI * 2;
-      this.swaySpeed = Math.random() * 0.02 + 0.01;
+      this.swaySpeed = Math.random() * 0.025 + 0.015;
     }
 
     update() {
@@ -83,22 +84,22 @@ document.addEventListener('DOMContentLoaded', () => {
         this.x += this.vx;
         this.y += this.vy;
         this.vx *= 0.96;
-        this.vy += 0.06; // gravity
+        this.vy += 0.07; // gravity
         this.life -= this.decay;
-        this.angle += this.angularSpeed * 2;
+        this.angle += this.angularSpeed * 2.5;
         this.flipAngle += this.flipSpeed * 2;
         return this.life > 0;
       }
 
-      // Normal falling motion
+      // Normal drift
       this.swayAngle += this.swaySpeed;
-      this.x += this.vx + Math.sin(this.swayAngle) * 1.2;
+      this.x += this.vx + Math.sin(this.swayAngle) * 1.1;
       this.y += this.vy;
       this.angle += this.angularSpeed;
       this.flipAngle += this.flipSpeed;
 
-      // Recycle when falling past screen
-      if (this.y > height + 20 || this.x < -60 || this.x > width + 60) {
+      // Respawn when fallen past viewport
+      if (this.y > height + 30 || this.x < -60 || this.x > width + 60) {
         this.reset();
       }
       return true;
@@ -109,34 +110,32 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.translate(this.x, this.y);
       ctx.rotate(this.angle);
 
-      // Simulating 3D flip by scaling in X axis
+      // 3D flip effect
       const flipScale = Math.sin(this.flipAngle);
       ctx.scale(flipScale, 1);
 
-      const currentOpacity = this.isBurst ? this.opacity * this.life : this.opacity;
-      ctx.fillStyle = `${this.colorBase}${currentOpacity})`;
+      const alpha = this.isBurst ? this.opacity * this.life : this.opacity;
 
-      // Draw graceful cherry blossom petal shape
+      // Gradient fill from tip to base
+      const grad = ctx.createLinearGradient(0, -this.size, 0, this.size);
+      grad.addColorStop(0, `rgba(${this.palette.tip}, ${alpha})`);
+      grad.addColorStop(1, `rgba(${this.palette.base}, ${alpha})`);
+      ctx.fillStyle = grad;
+
+      // Notched sakura petal path
       ctx.beginPath();
-      ctx.moveTo(0, -this.size);
-      ctx.bezierCurveTo(this.size * 0.75, -this.size * 0.6, this.size * 0.85, this.size * 0.4, 0, this.size);
-      ctx.bezierCurveTo(-this.size * 0.85, this.size * 0.4, -this.size * 0.75, -this.size * 0.6, 0, -this.size);
+      ctx.moveTo(0, this.size);
+      ctx.bezierCurveTo(this.size * 0.7, this.size * 0.4, this.size * 0.65, -this.size * 0.5, this.size * 0.25, -this.size * 0.9);
+      ctx.quadraticCurveTo(0, -this.size * 0.7, -this.size * 0.25, -this.size * 0.9);
+      ctx.bezierCurveTo(-this.size * 0.65, -this.size * 0.5, -this.size * 0.7, this.size * 0.4, 0, this.size);
       ctx.fill();
-
-      // Subtle petal vein highlight
-      ctx.strokeStyle = `rgba(255, 255, 255, ${currentOpacity * 0.4})`;
-      ctx.lineWidth = 0.8;
-      ctx.beginPath();
-      ctx.moveTo(0, -this.size * 0.7);
-      ctx.quadraticCurveTo(this.size * 0.1, 0, 0, this.size * 0.7);
-      ctx.stroke();
 
       ctx.restore();
     }
   }
 
-  // Fairy Dust / Sparkles Floating upwards
-  class Sparkle {
+  // Fairy Dust / Golden Sparkles
+  class FairySparkle {
     constructor() {
       this.reset();
     }
@@ -144,12 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.size = Math.random() * 2.2 + 0.8;
-      this.alpha = Math.random() * 0.6 + 0.2;
-      this.vy = -(Math.random() * 0.5 + 0.2);
-      this.vx = (Math.random() - 0.5) * 0.3;
+      this.size = Math.random() * 2 + 0.8;
+      this.baseAlpha = Math.random() * 0.5 + 0.25;
+      this.vy = -(Math.random() * 0.4 + 0.2);
+      this.vx = (Math.random() - 0.5) * 0.25;
+      this.pulse = Math.random() * Math.PI * 2;
       this.pulseSpeed = Math.random() * 0.04 + 0.02;
-      this.pulse = Math.random() * Math.PI;
     }
 
     update() {
@@ -164,147 +163,144 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     draw() {
-      const currentAlpha = (Math.sin(this.pulse) * 0.4 + 0.6) * this.alpha;
+      const alpha = (Math.sin(this.pulse) * 0.4 + 0.6) * this.baseAlpha;
       ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.fillStyle = `rgba(255, 240, 200, ${currentAlpha})`;
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = 'rgba(255, 215, 140, 0.8)';
+      ctx.fillStyle = `rgba(255, 245, 210, ${alpha})`;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = 'rgba(255, 210, 130, 0.7)';
       ctx.beginPath();
-      ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     }
   }
 
-  // Initialize petals & sparkles
+  // Populate particles
   for (let i = 0; i < PETAL_COUNT; i++) {
-    const p = new Petal();
-    p.y = Math.random() * height; // spread across screen on initial load
+    const p = new SakuraPetal();
+    p.y = Math.random() * height; // scatter evenly at start
     petals.push(p);
   }
 
   for (let i = 0; i < SPARKLE_COUNT; i++) {
-    sparkles.push(new Sparkle());
+    sparkles.push(new FairySparkle());
   }
 
   // Animation Loop
-  function animate() {
+  function renderScene() {
     ctx.clearRect(0, 0, width, height);
 
-    // Update & draw sparkles
+    // Sparkles behind
     for (let i = 0; i < sparkles.length; i++) {
       sparkles[i].update();
       sparkles[i].draw();
     }
 
-    // Update & draw continuous petals
+    // Continuous floating petals
     for (let i = 0; i < petals.length; i++) {
       petals[i].update();
       petals[i].draw();
     }
 
-    // Update & draw interactive burst petals
-    for (let i = burstParticles.length - 1; i >= 0; i--) {
-      const p = burstParticles[i];
-      if (!p.update()) {
-        burstParticles.splice(i, 1);
+    // Interactive burst petals
+    for (let i = bursts.length - 1; i >= 0; i--) {
+      const b = bursts[i];
+      if (!b.update()) {
+        bursts.splice(i, 1);
       } else {
-        p.draw();
+        b.draw();
       }
     }
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(renderScene);
   }
-  animate();
+  renderScene();
 
   /* ========================================================
-     2. INTERACTIVE CLICK / TOUCH PETAL BURST
+     2. TOUCH & CLICK INTERACTION (PETAL BURST)
      ======================================================== */
-  function createPetalBurst(x, y) {
-    const count = 16;
-    for (let i = 0; i < count; i++) {
-      burstParticles.push(new Petal(true, x, y));
+  function triggerBurst(x, y) {
+    const burstCount = isMobile ? 12 : 18;
+    for (let i = 0; i < burstCount; i++) {
+      bursts.push(new SakuraPetal(true, x, y));
     }
-    // Also play soft chime note
-    playHarpChime();
+    playGentleChime();
   }
 
   window.addEventListener('click', (e) => {
-    // Avoid triggering when clicking modal elements directly
-    if (e.target.closest('.modal-card')) return;
-    createPetalBurst(e.clientX, e.clientY);
+    if (e.target.closest('.envelope-card')) return;
+    triggerBurst(e.clientX, e.clientY);
   });
 
   window.addEventListener('touchstart', (e) => {
     if (e.touches && e.touches[0]) {
+      if (e.target.closest('.envelope-card')) return;
       const touch = e.touches[0];
-      if (e.target.closest('.modal-card')) return;
-      createPetalBurst(touch.clientX, touch.clientY);
+      triggerBurst(touch.clientX, touch.clientY);
     }
   }, { passive: true });
 
   /* ========================================================
-     3. MODAL INVITATION OPEN & CLOSE
+     3. MODAL CARD OPEN / CLOSE
      ======================================================== */
-  const openCardBtn = document.getElementById('openCardBtn');
-  const closeModalBtn = document.getElementById('closeModalBtn');
+  const openBtn = document.getElementById('openInvitationBtn');
+  const closeBtn = document.getElementById('closeModalBtn');
   const modalBackdrop = document.getElementById('modalBackdrop');
   const invitationModal = document.getElementById('invitationModal');
-  const replayIntroBtn = document.getElementById('replayIntroBtn');
+  const replayBtn = document.getElementById('replayBtn');
 
-  function openModal() {
-    // Grand petal explosion around button
-    const rect = openCardBtn.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    for (let i = 0; i < 30; i++) {
-      burstParticles.push(new Petal(true, centerX, centerY));
+  function openCard() {
+    const rect = openBtn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    for (let i = 0; i < 28; i++) {
+      bursts.push(new SakuraPetal(true, cx, cy));
     }
 
     invitationModal.classList.add('active');
     invitationModal.setAttribute('aria-hidden', 'false');
-    playCelebrationChord();
+    playArpeggio();
   }
 
-  function closeModal() {
+  function closeCard() {
     invitationModal.classList.remove('active');
     invitationModal.setAttribute('aria-hidden', 'true');
   }
 
-  openCardBtn.addEventListener('click', (e) => {
+  openBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    openModal();
+    openCard();
   });
 
-  closeModalBtn.addEventListener('click', (e) => {
+  closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    closeModal();
+    closeCard();
   });
 
-  modalBackdrop.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', closeCard);
 
-  // Escape key to close modal
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && invitationModal.classList.contains('active')) {
-      closeModal();
+      closeCard();
     }
   });
 
   /* ========================================================
-     4. REPLAY BLOOMING ANIMATION FUNCTION
+     4. REPLAY BLOOMING ANIMATION
      ======================================================== */
-  function replayBlooming() {
-    closeModal();
-    const branches = document.querySelectorAll('.branch-stem');
-    const leaves = document.querySelectorAll('.leaf');
-    const flowers = document.querySelectorAll('.flower-node');
-    const introCard = document.getElementById('introCard');
+  function replayAnimation() {
+    closeCard();
 
-    // Temporarily remove animation
-    [...branches, ...leaves, ...flowers].forEach((el) => {
+    const branches = document.querySelectorAll('.branch-path');
+    const leaves = document.querySelectorAll('.leaf-elem');
+    const blooms = document.querySelectorAll('.flower-bloom');
+    const introCard = document.getElementById('mainIntroCard');
+
+    // Trigger reflow to restart CSS keyframes
+    [...branches, ...leaves, ...blooms].forEach((el) => {
       el.style.animation = 'none';
-      el.offsetHeight; // trigger reflow
+      el.offsetHeight; // Reflow
       el.style.animation = '';
     });
 
@@ -314,38 +310,36 @@ document.addEventListener('DOMContentLoaded', () => {
       introCard.style.animation = '';
     }
 
-    // Burst petals at center
-    createPetalBurst(width / 2, height / 2);
+    triggerBurst(width / 2, height / 2);
   }
 
-  if (replayIntroBtn) {
-    replayIntroBtn.addEventListener('click', (e) => {
+  if (replayBtn) {
+    replayBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      replayBlooming();
+      replayAnimation();
     });
   }
 
   /* ========================================================
-     5. WEB AUDIO API - ETHEREAL MUSIC BOX / CHIMES
-     (Zero external audio files needed, works immediately!)
+     5. WEB AUDIO API - ETHEREAL MUSIC BOX
      ======================================================== */
   let audioCtx = null;
-  let isSoundActive = false;
-  let bgMelodyTimer = null;
+  let isSoundOn = false;
+  let bgMelodyId = null;
   const audioToggle = document.getElementById('audioToggle');
 
-  function initAudio() {
+  function getAudioContext() {
     if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioCtxClass();
     }
     if (audioCtx.state === 'suspended') {
       audioCtx.resume();
     }
+    return audioCtx;
   }
 
-  // Soft romantic music box note
-  function playNote(freq, startTime, duration = 1.2, gainLevel = 0.12) {
+  function playTone(freq, startTime, duration = 1.3, volume = 0.1) {
     if (!audioCtx) return;
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
@@ -354,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     osc.frequency.setValueAtTime(freq, startTime);
 
     gain.gain.setValueAtTime(0, startTime);
-    gain.gain.linearRampToValueAtTime(gainLevel, startTime + 0.04);
+    gain.gain.linearRampToValueAtTime(volume, startTime + 0.03);
     gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
     osc.connect(gain);
@@ -364,64 +358,57 @@ document.addEventListener('DOMContentLoaded', () => {
     osc.stop(startTime + duration);
   }
 
-  // Single harp chime note for interactions
-  const chimeFreqs = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50]; // C5, D5, E5, G5, A5, C6
-  function playHarpChime() {
-    if (!isSoundActive) return;
-    initAudio();
-    const now = audioCtx.currentTime;
-    const freq = chimeFreqs[Math.floor(Math.random() * chimeFreqs.length)];
-    playNote(freq, now, 1.5, 0.1);
+  const harpPitches = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50];
+  function playGentleChime() {
+    if (!isSoundOn) return;
+    const ctx = getAudioContext();
+    const now = ctx.currentTime;
+    const pitch = harpPitches[Math.floor(Math.random() * harpPitches.length)];
+    playTone(pitch, now, 1.4, 0.08);
   }
 
-  // Gentle celebration chord when card opens
-  function playCelebrationChord() {
-    if (!isSoundActive) return;
-    initAudio();
-    const now = audioCtx.currentTime;
-    const chord = [523.25, 659.25, 783.99, 1046.50]; // C Major arpeggio
-    chord.forEach((freq, idx) => {
-      playNote(freq, now + idx * 0.12, 2.2, 0.14);
+  function playArpeggio() {
+    if (!isSoundOn) return;
+    const ctx = getAudioContext();
+    const now = ctx.currentTime;
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, idx) => {
+      playTone(freq, now + idx * 0.1, 2.0, 0.12);
     });
   }
 
-  // Gentle ambient melody loop
-  const melodyNotes = [
-    523.25, 659.25, 783.99, 659.25,
-    880.00, 783.99, 659.25, 587.33
-  ];
-  let noteIndex = 0;
+  const loopMelody = [523.25, 659.25, 783.99, 659.25, 880.00, 783.99, 659.25, 587.33];
+  let melIdx = 0;
 
-  function startAmbientMelody() {
-    bgMelodyTimer = setInterval(() => {
-      if (!isSoundActive || !audioCtx) return;
-      const now = audioCtx.currentTime;
-      playNote(melodyNotes[noteIndex], now, 2.0, 0.08);
-      noteIndex = (noteIndex + 1) % melodyNotes.length;
-    }, 1200);
+  function startBackgroundMusic() {
+    bgMelodyId = setInterval(() => {
+      if (!isSoundOn || !audioCtx) return;
+      playTone(loopMelody[melIdx], audioCtx.currentTime, 1.8, 0.06);
+      melIdx = (melIdx + 1) % loopMelody.length;
+    }, 1300);
   }
 
-  function stopAmbientMelody() {
-    if (bgMelodyTimer) {
-      clearInterval(bgMelodyTimer);
-      bgMelodyTimer = null;
+  function stopBackgroundMusic() {
+    if (bgMelodyId) {
+      clearInterval(bgMelodyId);
+      bgMelodyId = null;
     }
   }
 
   audioToggle.addEventListener('click', (e) => {
     e.stopPropagation();
-    initAudio();
-    isSoundActive = !isSoundActive;
+    getAudioContext();
+    isSoundOn = !isSoundOn;
 
-    if (isSoundActive) {
+    if (isSoundOn) {
       audioToggle.classList.add('playing');
-      audioToggle.title = 'Đang phát âm thanh nhẹ (Click để tắt)';
-      playCelebrationChord();
-      startAmbientMelody();
+      audioToggle.title = 'Đang phát nhạc nhẹ';
+      playArpeggio();
+      startBackgroundMusic();
     } else {
       audioToggle.classList.remove('playing');
-      audioToggle.title = 'Bật âm thanh nhẹ';
-      stopAmbientMelody();
+      audioToggle.title = 'Bật nhạc nhẹ';
+      stopBackgroundMusic();
     }
   });
 });
