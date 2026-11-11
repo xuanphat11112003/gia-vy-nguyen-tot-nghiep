@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Tốt Nghiệp - Gia Vy</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Canvas for Falling Petals & Fairy Lights -->
+  <canvas id="petalCanvas"></canvas>
+
+  <!-- Sky Elements: Floating Dreamy Clouds & Sun Glow -->
+  <div class="sky-atmosphere">
+    <div class="sun-glow"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+  </div>
+
+  <!-- Growing Flower Vines & Blooming Blossoms (SVG Frame) -->
+  <div class="floral-frame">
+    <!-- Bottom Left Blooming Branch -->
+    <svg class="vine-branch vine-left" viewBox="0 0 450 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="branchGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#7a4b56"/>
+          <stop offset="60%" stop-color="#a86b77"/>
+          <stop offset="100%" stop-color="#d49b9e"/>
+        </linearGradient>
+        <radialGradient id="petalGrad1" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#fff5f7"/>
+          <stop offset="50%" stop-color="#ffb8cf"/>
+          <stop offset="100%" stop-color="#f87aa7"/>
+        </radialGradient>
+        <radialGradient id="petalGrad2" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="60%" stop-color="#ffccd9"/>
+          <stop offset="100%" stop-color="#f48fb1"/>
+        </radialGradient>
+        <filter id="bloomGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+
+      <!-- Main Branch Trunk -->
+      <path class="branch-stem branch-stem-1" d="M -10 520 Q 80 430 110 330 T 170 190 T 260 90" stroke="url(#branchGrad)" stroke-width="6" stroke-linecap="round"/>
+      <path class="branch-stem branch-stem-2" d="M 80 430 Q 150 420 190 380 T 280 340" stroke="url(#branchGrad)" stroke-width="4" stroke-linecap="round"/>
+      <path class="branch-stem branch-stem-3" d="M 125 300 Q 80 230 115 160 T 175 110" stroke="url(#branchGrad)" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- Leaves -->
+      <g class="leaves-group">
+        <path class="leaf leaf-1" d="M 100 350 Q 85 320 105 315 Q 120 330 100 350 Z" fill="#88b082"/>
+        <path class="leaf leaf-2" d="M 160 215 Q 150 185 170 180 Q 185 195 160 215 Z" fill="#9bc495"/>
+        <path class="leaf leaf-3" d="M 185 390 Q 210 370 215 390 Q 200 405 185 390 Z" fill="#88b082"/>
+        <path class="leaf leaf-4" d="M 230 350 Q 255 330 260 355 Q 240 370 230 350 Z" fill="#a5caa0"/>
+        <path class="leaf leaf-5" d="M 120 170 Q 105 140 130 135 Q 145 155 120 170 Z" fill="#88b082"/>
+      </g>
+
+      <!-- Blossoms on Left Branch -->
+      <g class="flower-node flower-1" transform="translate(260, 90)">
+        <g class="flower-petals">
+          <circle cx="0" cy="-18" r="14" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="17" cy="-6" r="14" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="11" cy="15" r="14" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="-11" cy="15" r="14" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="-17" cy="-6" r="14" fill="url(#petalGrad1)" opacity="0.9"/>
+          <!-- Inner Core -->
+          <circle cx="0" cy="0" r="7" fill="#ffe082"/>
+          <circle cx="0" cy="0" r="3" fill="#ffb300"/>
+        </g>
+      </g>
+
+      <g class="flower-node flower-2" transform="translate(170, 190) scale(1.15)">
+        <g class="flower-petals">
+          <circle cx="0" cy="-20" r="15" fill="url(#petalGrad2)" opacity="0.95"/>
+          <circle cx="19" cy="-6" r="15" fill="url(#petalGrad2)" opacity="0.95"/>
+          <circle cx="12" cy="16" r="15" fill="url(#petalGrad2)" opacity="0.95"/>
+          <circle cx="-12" cy="16" r="15" fill="url(#petalGrad2)" opacity="0.95"/>
+          <circle cx="-19" cy="-6" r="15" fill="url(#petalGrad2)" opacity="0.95"/>
+          <circle cx="0" cy="0" r="8" fill="#ffe57f"/>
+          <circle cx="0" cy="0" r="4" fill="#ffca28"/>
+        </g>
+      </g>
+
+      <g class="flower-node flower-3" transform="translate(280, 340) scale(0.95)">
+        <g class="flower-petals">
+          <circle cx="0" cy="-16" r="13" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="15" cy="-5" r="13" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="9" cy="13" r="13" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="-9" cy="13" r="13" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="-15" cy="-5" r="13" fill="url(#petalGrad1)" opacity="0.9"/>
+          <circle cx="0" cy="0" r="6" fill="#ffe082"/>
+        </g>
+      </g>
+
+      <g class="flower-node flower-4" transform="translate(175, 110) scale(0.85)">
+        <g class="flower-petals">
+          <circle cx="0" cy="-15" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="14" cy="-5" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="9" cy="12" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="-9" cy="12" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="-14" cy="-5" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="0" cy="0" r="5" fill="#ffe082"/>
+        </g>
+      </g>
+
+      <!-- Flower Buds -->
+      <g class="flower-node flower-bud-1" transform="translate(125, 300) scale(0.6)">
+        <ellipse cx="0" cy="0" rx="9" ry="15" fill="#f48fb1" transform="rotate(-30)"/>
+        <ellipse cx="4" cy="0" rx="7" ry="12" fill="#ffb8cf" transform="rotate(-15)"/>
+      </g>
+    </svg>
+
+    <!-- Bottom Right Blooming Branch -->
+    <svg class="vine-branch vine-right" viewBox="0 0 450 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Symmetrical / organically mirrored branches -->
+      <path class="branch-stem branch-stem-r1" d="M 460 520 Q 370 420 340 320 T 270 180 T 170 80" stroke="url(#branchGrad)" stroke-width="6" stroke-linecap="round"/>
+      <path class="branch-stem branch-stem-r2" d="M 370 420 Q 290 405 250 365 T 160 325" stroke="url(#branchGrad)" stroke-width="4" stroke-linecap="round"/>
+      <path class="branch-stem branch-stem-r3" d="M 320 290 Q 360 215 320 150 T 260 100" stroke="url(#branchGrad)" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- Leaves -->
+      <g class="leaves-group">
+        <path class="leaf leaf-r1" d="M 345 340 Q 365 310 340 305 Q 325 320 345 340 Z" fill="#88b082"/>
+        <path class="leaf leaf-r2" d="M 280 205 Q 295 175 270 170 Q 255 185 280 205 Z" fill="#9bc495"/>
+        <path class="leaf leaf-r3" d="M 255 380 Q 230 360 225 380 Q 240 395 255 380 Z" fill="#88b082"/>
+        <path class="leaf leaf-r4" d="M 210 340 Q 185 320 180 345 Q 200 360 210 340 Z" fill="#a5caa0"/>
+      </g>
+
+      <!-- Blossoms on Right Branch -->
+      <g class="flower-node flower-r1" transform="translate(170, 80) scale(1.1)">
+        <g class="flower-petals">
+          <circle cx="0" cy="-18" r="14" fill="url(#petalGrad1)" opacity="0.92"/>
+          <circle cx="17" cy="-6" r="14" fill="url(#petalGrad1)" opacity="0.92"/>
+          <circle cx="11" cy="15" r="14" fill="url(#petalGrad1)" opacity="0.92"/>
+          <circle cx="-11" cy="15" r="14" fill="url(#petalGrad1)" opacity="0.92"/>
+          <circle cx="-17" cy="-6" r="14" fill="url(#petalGrad1)" opacity="0.92"/>
+          <circle cx="0" cy="0" r="7" fill="#ffe082"/>
+          <circle cx="0" cy="0" r="3" fill="#ffb300"/>
+        </g>
+      </g>
+
+      <g class="flower-node flower-r2" transform="translate(270, 180) scale(1.2)">
+        <g class="flower-petals">
+          <circle cx="0" cy="-20" r="15" fill="url(#petalGrad2)" opacity="0.96"/>
+          <circle cx="19" cy="-6" r="15" fill="url(#petalGrad2)" opacity="0.96"/>
+          <circle cx="12" cy="16" r="15" fill="url(#petalGrad2)" opacity="0.96"/>
+          <circle cx="-12" cy="16" r="15" fill="url(#petalGrad2)" opacity="0.96"/>
+          <circle cx="-19" cy="-6" r="15" fill="url(#petalGrad2)" opacity="0.96"/>
+          <circle cx="0" cy="0" r="8" fill="#ffe57f"/>
+          <circle cx="0" cy="0" r="4" fill="#ffca28"/>
+        </g>
+      </g>
+
+      <g class="flower-node flower-r3" transform="translate(160, 325) scale(0.9)">
+        <g class="flower-petals">
+          <circle cx="0" cy="-16" r="13" fill="url(#petalGrad1)"/>
+          <circle cx="15" cy="-5" r="13" fill="url(#petalGrad1)"/>
+          <circle cx="9" cy="13" r="13" fill="url(#petalGrad1)"/>
+          <circle cx="-9" cy="13" r="13" fill="url(#petalGrad1)"/>
+          <circle cx="-15" cy="-5" r="13" fill="url(#petalGrad1)"/>
+          <circle cx="0" cy="0" r="6" fill="#ffe082"/>
+        </g>
+      </g>
+
+      <g class="flower-node flower-r4" transform="translate(260, 100) scale(0.8)">
+        <g class="flower-petals">
+          <circle cx="0" cy="-15" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="14" cy="-5" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="9" cy="12" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="-9" cy="12" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="-14" cy="-5" r="12" fill="url(#petalGrad2)"/>
+          <circle cx="0" cy="0" r="5" fill="#ffe082"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Central Intro Content Container -->
+  <main class="intro-container">
+    <div class="intro-card" id="introCard">
+      <!-- Graduation Icon Badge -->
+      <div class="badge-wrapper">
+        <div class="badge-pulse"></div>
+        <div class="grad-badge">
+          <!-- Graduation Cap SVG -->
+          <svg class="cap-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 10 L58 22 L32 34 L6 22 Z" fill="url(#badgeGoldGrad)" stroke="#e6a15c" stroke-width="1.5"/>
+            <path d="M16 27 V42 C16 48 48 48 48 42 V27" stroke="url(#badgeGoldGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M52 25 V44 Q52 46 54 48 L56 46" stroke="#f6c28b" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="56" cy="48" r="2.5" fill="#e6a15c"/>
+            <defs>
+              <linearGradient id="badgeGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fff0d4"/>
+                <stop offset="50%" stop-color="#f8be86"/>
+                <stop offset="100%" stop-color="#d4883e"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Typography -->
+      <div class="text-group">
+        <p class="intro-pretitle">✦ Kỷ Niệm Tốt Nghiệp ✦</p>
+        <h1 class="intro-title">
+          <span class="greeting-word">Happy</span>
+          <span class="highlight-name">Graduation</span>
+        </h1>
+        <div class="title-divider">
+          <span class="divider-line"></span>
+          <span class="divider-flower">🌸</span>
+          <span class="divider-line"></span>
+        </div>
+        <p class="intro-recipient">Nguyễn Gia Vy</p>
+        <p class="intro-quote">
+          "Mỗi đóa hoa nở rộ là một ước mơ thành hình.<br>
+          Cảm ơn bạn đã luôn đồng hành cùng hành trình rực rỡ này!"
+        </p>
+      </div>
+
+      <!-- Call to Action Button -->
+      <div class="action-wrap">
+        <button class="open-card-btn" id="openCardBtn" aria-label="Mở thiệp mời">
+          <span class="btn-sparkle">✨</span>
+          <span class="btn-text">Mở Thiệp Mừng</span>
+          <span class="btn-sparkle">✨</span>
+          <div class="btn-reflection"></div>
+        </button>
+      </div>
+
+      <!-- Subtle hint text -->
+      <p class="tap-hint">Chạm vào màn hình để thả thêm cánh hoa</p>
+    </div>
+  </main>
+
+  <!-- Interactive Invitation Modal (Appears when button is clicked) -->
+  <section class="invitation-modal" id="invitationModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+      <button class="close-btn" id="closeModalBtn" aria-label="Đóng thiệp">&times;</button>
+      <div class="modal-inner">
+        <div class="modal-header">
+          <span class="modal-tag">LỜI MỜI TRÂN TRỌNG</span>
+          <h2>Lễ Trao Bằng Tốt Nghiệp</h2>
+          <div class="gold-line"></div>
+        </div>
+        <div class="modal-body">
+          <p class="invitee-text">Thân mời Bạn đến chung vui cùng</p>
+          <h3 class="grad-name">Nguyễn Gia Vy</h3>
+          
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-icon">📅</span>
+              <div class="info-detail">
+                <strong>Thời gian</strong>
+                <p>08:30 — Thứ Bảy, Ngày 28/11/2026</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">📍</span>
+              <div class="info-detail">
+                <strong>Địa điểm</strong>
+                <p>Hội Trường A - Đại học Quốc Gia</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">👗</span>
+              <div class="info-detail">
+                <strong>Dresscode</strong>
+                <p>Trắng / Hồng Pastel / Tự do rạng rỡ</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-wish">
+            "Sự hiện diện của bạn là niềm vinh hạnh và kỷ niệm đáng nhớ nhất trong ngày tốt nghiệp của mình!"
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="replayIntroBtn">🌸 Xem lại hiệu ứng hoa</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audio control (optional gentle ambiance) -->
+  <div class="audio-control" id="audioToggle" title="Bật/Tắt nhạc nhẹ">
+    <span class="audio-icon">🎵</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
