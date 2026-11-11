@@ -2,12 +2,15 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Thiệp Mời Tốt Nghiệp - Nguyễn Gia Vy 🎓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Thiệp Mời Lễ Tốt Nghiệp - Nguyễn Gia Vy 🎓</title>
   
   <!-- Primary Meta Tags for Social Sharing -->
-  <meta name="title" content="Thiệp Mời Lễ Tốt Nghiệp - Nguyễn Gia Vy">
+  <meta name="title" content="Thiệp Mời Lễ Tốt Nghiệp - Nguyễn Gia Vy 🎓">
   <meta name="description" content="Thương mời bạn đến chung vui ngày lễ tốt nghiệp cùng Nguyễn Gia Vy tại Trường ĐH Công Nghiệp TP.HCM!">
+  <meta name="theme-color" content="#fca7c4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,10 +22,10 @@
 </head>
 <body>
 
-  <!-- Fullscreen Canvas for Floating Sakura Petals & Magic Dust -->
+  <!-- Fullscreen Canvas for Floating Daisy & Wildflower Petals -->
   <canvas id="petalCanvas"></canvas>
 
-  <!-- Sky Atmosphere: Sun Glow & Drifting Pink Clouds -->
+  <!-- Sky Atmosphere: Soft Twilight Glow & Drifting Pink Clouds -->
   <div class="sky-container">
     <div class="sun-flare"></div>
     <div class="dream-cloud cloud-top"></div>
@@ -30,197 +33,187 @@
     <div class="dream-cloud cloud-bottom"></div>
   </div>
 
-  <!-- SVG Floral Branches & Blooming Cherry Blossoms -->
+  <!-- SVG Wildflower Meadow ("Bụi hoa dại") - Chic & Youthful -->
   <div class="floral-overlay">
     
-    <!-- SVG Defs for Petal Gradients & Shading -->
     <svg width="0" height="0" class="svg-definitions">
       <defs>
-        <!-- Branch Wood Gradient -->
-        <linearGradient id="branchWood" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#4a2530"/>
-          <stop offset="50%" stop-color="#733b49"/>
-          <stop offset="100%" stop-color="#a6586b"/>
+        <!-- Stem & Leaf Gradients -->
+        <linearGradient id="stemGrad1" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#3d6635"/>
+          <stop offset="60%" stop-color="#5a8b50"/>
+          <stop offset="100%" stop-color="#80af75"/>
         </linearGradient>
 
-        <!-- Sakura Petal Gradient -->
-        <linearGradient id="sakuraGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stop-color="#ff7597"/>
-          <stop offset="50%" stop-color="#ffb3c6"/>
+        <linearGradient id="leafGradMeadow" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#46733c"/>
+          <stop offset="100%" stop-color="#8bc34a"/>
+        </linearGradient>
+
+        <!-- Daisy Petal Gradient (Crisp pure white with soft cream tint) -->
+        <linearGradient id="daisyWhitePetal" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#f5e6eb"/>
+          <stop offset="40%" stop-color="#ffffff"/>
           <stop offset="100%" stop-color="#ffffff"/>
         </linearGradient>
 
-        <!-- Sakura Petal Deep Gradient -->
-        <linearGradient id="sakuraGradDeep" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stop-color="#e91e63"/>
-          <stop offset="50%" stop-color="#f48fb1"/>
-          <stop offset="100%" stop-color="#fff0f5"/>
-        </linearGradient>
-
-        <!-- Leaf Gradient -->
-        <linearGradient id="leafGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#43a047"/>
-          <stop offset="100%" stop-color="#81c784"/>
-        </linearGradient>
-
-        <!-- Golden Pistil Core -->
-        <radialGradient id="goldCore" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#ffe082"/>
-          <stop offset="60%" stop-color="#ffb300"/>
+        <!-- Daisy Warm Golden Sun Center -->
+        <radialGradient id="daisySunCore" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#fff176"/>
+          <stop offset="50%" stop-color="#fbc02d"/>
+          <stop offset="85%" stop-color="#f57f17"/>
           <stop offset="100%" stop-color="#e65100"/>
         </radialGradient>
 
-        <!-- 5-Petal Sakura Blossom Symbol -->
-        <g id="blossomFlower">
-          <g class="petals-group">
-            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGrad)" />
-            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGradDeep)" transform="rotate(72)" />
-            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGrad)" transform="rotate(144)" />
-            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGradDeep)" transform="rotate(216)" />
-            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGrad)" transform="rotate(288)" />
-          </g>
+        <!-- Pastel Pink Wildflower Petal Gradient -->
+        <linearGradient id="pinkWildPetal" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#f48fb1"/>
+          <stop offset="50%" stop-color="#ffb9cf"/>
+          <stop offset="100%" stop-color="#fff5f8"/>
+        </linearGradient>
 
-          <g class="pistil-group">
-            <circle cx="0" cy="0" r="5" fill="#f06292" opacity="0.6"/>
-            <line x1="0" y1="0" x2="0" y2="-10" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
-            <circle cx="0" cy="-11" r="1.6" fill="#ffb300"/>
-            <line x1="0" y1="0" x2="9.5" y2="-3" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
-            <circle cx="10.5" cy="-3.3" r="1.6" fill="#ffb300"/>
-            <line x1="0" y1="0" x2="6" y2="8" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
-            <circle cx="6.5" cy="8.8" r="1.6" fill="#ffb300"/>
-            <line x1="0" y1="0" x2="-6" y2="8" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
-            <circle cx="-6.5" cy="8.8" r="1.6" fill="#ffb300"/>
-            <line x1="0" y1="0" x2="-9.5" y2="-3" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
-            <circle cx="-10.5" cy="-3.3" r="1.6" fill="#ffb300"/>
-            <circle cx="0" cy="0" r="3.8" fill="url(#goldCore)"/>
+        <!-- Cute White Daisy (Hoa cúc họa mi / Chamomile) -->
+        <g id="wildDaisy">
+          <g class="flower-petals-spin">
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(30)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(60)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(120)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(150)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(210)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(240)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(300)"/>
+            <ellipse cx="0" cy="-18" rx="4.8" ry="11" fill="url(#daisyWhitePetal)" transform="rotate(330)"/>
           </g>
+          <!-- Center Sun Core -->
+          <circle cx="0" cy="0" r="9.5" fill="url(#daisySunCore)"/>
+          <circle cx="0" cy="0" r="6" fill="#fbc02d" opacity="0.8"/>
+          <circle cx="0" cy="0" r="3" fill="#e65100" opacity="0.7"/>
         </g>
 
-        <!-- Flower Bud Symbol -->
-        <g id="blossomBud">
-          <ellipse cx="0" cy="-11" rx="8" ry="14" fill="url(#sakuraGradDeep)"/>
-          <ellipse cx="2" cy="-10" rx="5" ry="10" fill="url(#sakuraGrad)"/>
-          <path d="M -5 0 Q 0 -5 5 0 Q 0 5 -5 0 Z" fill="#43a047"/>
+        <!-- Pastel Pink Wildflower (Hoa dại cánh hồng phấn) -->
+        <g id="pinkMeadowFlower">
+          <g class="flower-petals-spin">
+            <ellipse cx="0" cy="-15" rx="5.5" ry="9.5" fill="url(#pinkWildPetal)"/>
+            <ellipse cx="0" cy="-15" rx="5.5" ry="9.5" fill="url(#pinkWildPetal)" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-15" rx="5.5" ry="9.5" fill="url(#pinkWildPetal)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-15" rx="5.5" ry="9.5" fill="url(#pinkWildPetal)" transform="rotate(135)"/>
+            <ellipse cx="0" cy="-15" rx="5.5" ry="9.5" fill="url(#pinkWildPetal)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-15" rx="5.5" ry="9.5" fill="url(#pinkWildPetal)" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-15" rx="5.5" ry="9.5" fill="url(#pinkWildPetal)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-15" rx="5.5" ry="9.5" fill="url(#pinkWildPetal)" transform="rotate(315)"/>
+          </g>
+          <circle cx="0" cy="0" r="7.5" fill="url(#daisySunCore)"/>
+          <circle cx="0" cy="0" r="3.5" fill="#f57f17"/>
+        </g>
+
+        <!-- Baby's Breath & Tiny Wild Buds -->
+        <g id="babyBudCluster">
+          <circle cx="0" cy="-10" r="5" fill="#ffffff" opacity="0.95"/>
+          <circle cx="0" cy="-10" r="2.2" fill="#ffe082"/>
+          <circle cx="8" cy="-3" r="4.2" fill="#ffd1dc" opacity="0.95"/>
+          <circle cx="-8" cy="-3" r="4.2" fill="#ffffff" opacity="0.95"/>
+          <circle cx="5" cy="7" r="3.8" fill="#ffffff" opacity="0.9"/>
+          <circle cx="-5" cy="7" r="3.8" fill="#ffd1dc" opacity="0.9"/>
         </g>
       </defs>
     </svg>
 
-    <!-- Top Left Draping Cherry Blossom Branch -->
-    <svg class="floral-svg branch-top-left" viewBox="0 0 340 340" fill="none">
-      <path class="branch-stem branch-d1" d="M -15 -10 C 60 30 110 60 160 120 C 190 160 205 200 215 250" stroke="url(#branchWood)" stroke-width="5" stroke-linecap="round"/>
-      <path class="branch-stem branch-d2" d="M 110 60 C 150 55 195 75 235 110" stroke="url(#branchWood)" stroke-width="3" stroke-linecap="round"/>
-      <path class="branch-stem branch-d3" d="M 60 30 C 85 85 105 125 120 165" stroke="url(#branchWood)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Bottom Left Wildflower Meadow Bush ("Bụi hoa dại bên trái") -->
+    <svg class="floral-svg meadow-left" viewBox="0 0 320 380" fill="none">
+      <!-- Slender Meadow Stems -->
+      <path class="meadow-stem stem-d1" d="M 40 400 C 60 300 70 210 50 120 C 45 90 35 70 25 45" stroke="url(#stemGrad1)" stroke-width="3" stroke-linecap="round"/>
+      <path class="meadow-stem stem-d2" d="M 80 400 C 95 320 135 240 160 160 C 175 110 185 80 195 50" stroke="url(#stemGrad1)" stroke-width="3.5" stroke-linecap="round"/>
+      <path class="meadow-stem stem-d3" d="M 120 400 C 130 330 190 270 220 200 C 240 160 250 135 260 100" stroke="url(#stemGrad1)" stroke-width="2.8" stroke-linecap="round"/>
+      <path class="meadow-stem stem-d4" d="M 20 400 C 35 340 10 270 30 200 C 40 165 55 140 70 115" stroke="url(#stemGrad1)" stroke-width="2.5" stroke-linecap="round"/>
 
-      <g class="leaf-sprout leaf-d1" transform="translate(95, 50) rotate(-40)">
-        <path d="M 0 0 C 10 -15 25 -15 30 0 C 25 15 10 15 0 0 Z" fill="url(#leafGrad)"/>
+      <!-- Fresh Meadow Foliage Leaves -->
+      <g class="meadow-leaf leaf-d1" transform="translate(62, 240) rotate(-40)">
+        <path d="M 0 0 C 12 -20 28 -20 32 0 C 28 20 12 20 0 0 Z" fill="url(#leafGradMeadow)"/>
       </g>
-      <g class="leaf-sprout leaf-d2" transform="translate(180, 150) rotate(35)">
-        <path d="M 0 0 C 8 -12 20 -12 24 0 C 20 12 8 12 0 0 Z" fill="url(#leafGrad)"/>
+      <g class="meadow-leaf leaf-d2" transform="translate(135, 230) rotate(35)">
+        <path d="M 0 0 C 10 -18 24 -18 28 0 C 24 18 10 18 0 0 Z" fill="url(#leafGradMeadow)"/>
+      </g>
+      <g class="meadow-leaf leaf-d3" transform="translate(175, 140) rotate(-25)">
+        <path d="M 0 0 C 8 -15 20 -15 24 0 C 20 15 8 15 0 0 Z" fill="url(#leafGradMeadow)"/>
+      </g>
+      <g class="meadow-leaf leaf-d4" transform="translate(42, 170) rotate(50)">
+        <path d="M 0 0 C 9 -16 22 -16 26 0 C 22 16 9 16 0 0 Z" fill="url(#leafGradMeadow)"/>
       </g>
 
-      <g transform="translate(215, 250)">
-        <g class="bloom-container bloom-d1 bloom-lg">
-          <use href="#blossomFlower"/>
+      <!-- Wildflower Blossoms Pop -->
+      <g transform="translate(195, 50)">
+        <g class="wildflower-bloom bloom-d1 bloom-lg">
+          <use href="#wildDaisy"/>
         </g>
       </g>
-      <g transform="translate(235, 110)">
-        <g class="bloom-container bloom-d2 bloom-md">
-          <use href="#blossomFlower"/>
+      <g transform="translate(25, 45)">
+        <g class="wildflower-bloom bloom-d2 bloom-md">
+          <use href="#pinkMeadowFlower"/>
         </g>
       </g>
-      <g transform="translate(160, 120)">
-        <g class="bloom-container bloom-d3 bloom-lg">
-          <use href="#blossomFlower"/>
+      <g transform="translate(260, 100)">
+        <g class="wildflower-bloom bloom-d3 bloom-md">
+          <use href="#wildDaisy"/>
         </g>
       </g>
-      <g transform="translate(120, 165)">
-        <g class="bloom-container bloom-d4 bloom-sm">
-          <use href="#blossomFlower"/>
+      <g transform="translate(70, 115)">
+        <g class="wildflower-bloom bloom-d4 bloom-sm">
+          <use href="#pinkMeadowFlower"/>
         </g>
       </g>
-      <g transform="translate(185, 190) rotate(-30)">
-        <g class="bloom-container bloom-d2">
-          <use href="#blossomBud"/>
+      <g transform="translate(145, 170)">
+        <g class="wildflower-bloom bloom-d2">
+          <use href="#babyBudCluster"/>
         </g>
       </g>
     </svg>
 
-    <!-- Bottom Left Growing Cherry Blossom Branch -->
-    <svg class="floral-svg branch-bottom-left" viewBox="0 0 360 420" fill="none">
-      <path class="branch-stem branch-d1" d="M -15 430 C 45 340 80 260 115 170 C 140 110 170 70 220 30" stroke="url(#branchWood)" stroke-width="6" stroke-linecap="round"/>
-      <path class="branch-stem branch-d2" d="M 80 260 C 130 240 165 230 215 210" stroke="url(#branchWood)" stroke-width="3.5" stroke-linecap="round"/>
-      <path class="branch-stem branch-d3" d="M 115 170 C 95 120 85 85 75 45" stroke="url(#branchWood)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Bottom Right Wildflower Meadow Bush ("Bụi hoa dại bên phải") -->
+    <svg class="floral-svg meadow-right" viewBox="0 0 320 380" fill="none">
+      <path class="meadow-stem stem-d1" d="M 280 400 C 260 300 250 210 270 120 C 275 90 285 70 295 45" stroke="url(#stemGrad1)" stroke-width="3" stroke-linecap="round"/>
+      <path class="meadow-stem stem-d2" d="M 240 400 C 225 320 185 240 160 160 C 145 110 135 80 125 50" stroke="url(#stemGrad1)" stroke-width="3.5" stroke-linecap="round"/>
+      <path class="meadow-stem stem-d3" d="M 200 400 C 190 330 130 270 100 200 C 80 160 70 135 60 100" stroke="url(#stemGrad1)" stroke-width="2.8" stroke-linecap="round"/>
+      <path class="meadow-stem stem-d4" d="M 300 400 C 285 340 310 270 290 200 C 280 165 265 140 250 115" stroke="url(#stemGrad1)" stroke-width="2.5" stroke-linecap="round"/>
 
-      <g class="leaf-sprout leaf-d1" transform="translate(70, 280) rotate(-65)">
-        <path d="M 0 0 C 10 -15 25 -15 30 0 C 25 15 10 15 0 0 Z" fill="url(#leafGrad)"/>
+      <!-- Leaves -->
+      <g class="meadow-leaf leaf-d1" transform="translate(258, 240) rotate(40)">
+        <path d="M 0 0 C -12 -20 -28 -20 -32 0 C -28 20 -12 20 0 0 Z" fill="url(#leafGradMeadow)"/>
       </g>
-      <g class="leaf-sprout leaf-d2" transform="translate(140, 130) rotate(20)">
-        <path d="M 0 0 C 9 -13 22 -13 26 0 C 22 13 9 13 0 0 Z" fill="url(#leafGrad)"/>
+      <g class="meadow-leaf leaf-d2" transform="translate(185, 230) rotate(-35)">
+        <path d="M 0 0 C -10 -18 -24 -18 -28 0 C -24 18 -10 18 0 0 Z" fill="url(#leafGradMeadow)"/>
       </g>
-
-      <g transform="translate(220, 30)">
-        <g class="bloom-container bloom-d2 bloom-lg">
-          <use href="#blossomFlower"/>
-        </g>
-      </g>
-      <g transform="translate(215, 210)">
-        <g class="bloom-container bloom-d1 bloom-lg">
-          <use href="#blossomFlower"/>
-        </g>
-      </g>
-      <g transform="translate(125, 150)">
-        <g class="bloom-container bloom-d3 bloom-md">
-          <use href="#blossomFlower"/>
-        </g>
-      </g>
-      <g transform="translate(75, 45)">
-        <g class="bloom-container bloom-d4 bloom-sm">
-          <use href="#blossomFlower"/>
-        </g>
-      </g>
-      <g transform="translate(160, 90) rotate(45)">
-        <g class="bloom-container bloom-d1">
-          <use href="#blossomBud"/>
-        </g>
-      </g>
-    </svg>
-
-    <!-- Bottom Right Growing Cherry Blossom Branch -->
-    <svg class="floral-svg branch-bottom-right" viewBox="0 0 360 420" fill="none">
-      <path class="branch-stem branch-d1" d="M 375 430 C 315 340 280 260 245 170 C 220 110 190 70 140 30" stroke="url(#branchWood)" stroke-width="6" stroke-linecap="round"/>
-      <path class="branch-stem branch-d2" d="M 280 260 C 230 240 195 230 145 210" stroke="url(#branchWood)" stroke-width="3.5" stroke-linecap="round"/>
-      <path class="branch-stem branch-d3" d="M 245 170 C 265 120 275 85 285 45" stroke="url(#branchWood)" stroke-width="2.5" stroke-linecap="round"/>
-
-      <g class="leaf-sprout leaf-d1" transform="translate(290, 280) rotate(65)">
-        <path d="M 0 0 C -10 -15 -25 -15 -30 0 C -25 15 -10 15 0 0 Z" fill="url(#leafGrad)"/>
-      </g>
-      <g class="leaf-sprout leaf-d2" transform="translate(220, 130) rotate(-20)">
-        <path d="M 0 0 C -9 -13 -22 -13 -26 0 C -22 13 -9 13 0 0 Z" fill="url(#leafGrad)"/>
+      <g class="meadow-leaf leaf-d3" transform="translate(145, 140) rotate(25)">
+        <path d="M 0 0 C -8 -15 -20 -15 -24 0 C -20 15 -8 15 0 0 Z" fill="url(#leafGradMeadow)"/>
       </g>
 
-      <g transform="translate(140, 30)">
-        <g class="bloom-container bloom-d1 bloom-lg">
-          <use href="#blossomFlower"/>
+      <!-- Wildflower Blossoms -->
+      <g transform="translate(125, 50)">
+        <g class="wildflower-bloom bloom-d1 bloom-lg">
+          <use href="#wildDaisy"/>
         </g>
       </g>
-      <g transform="translate(145, 210)">
-        <g class="bloom-container bloom-d3 bloom-lg">
-          <use href="#blossomFlower"/>
+      <g transform="translate(295, 45)">
+        <g class="wildflower-bloom bloom-d3 bloom-md">
+          <use href="#pinkMeadowFlower"/>
         </g>
       </g>
-      <g transform="translate(235, 150)">
-        <g class="bloom-container bloom-d2 bloom-md">
-          <use href="#blossomFlower"/>
+      <g transform="translate(60, 100)">
+        <g class="wildflower-bloom bloom-d2 bloom-md">
+          <use href="#wildDaisy"/>
         </g>
       </g>
-      <g transform="translate(285, 45)">
-        <g class="bloom-container bloom-d4 bloom-sm">
-          <use href="#blossomFlower"/>
+      <g transform="translate(250, 115)">
+        <g class="wildflower-bloom bloom-d4 bloom-sm">
+          <use href="#pinkMeadowFlower"/>
         </g>
       </g>
-      <g transform="translate(200, 90) rotate(-45)">
-        <g class="bloom-container bloom-d2">
-          <use href="#blossomBud"/>
+      <g transform="translate(175, 170)">
+        <g class="wildflower-bloom bloom-d2">
+          <use href="#babyBudCluster"/>
         </g>
       </g>
     </svg>
@@ -235,15 +228,14 @@
         <span class="cover-tag">✦ LỄ TỐT NGHIỆP ✦</span>
       </div>
 
-      <!-- Center Space lets 5.png's "THIỆP MỜI" show prominently -->
-      <div class="card-cover-center">
-        <!-- Recipient Name placed gracefully under "THIỆP MỜI" inside the pink badge -->
+      <!-- Recipient Name placed with exact vertical positioning cleanly BELOW "MỜI" -->
+      <div class="recipient-name-holder">
         <h2 class="cover-recipient-name">Nguyễn Gia Vy</h2>
       </div>
 
       <!-- Action Button at the bottom -->
       <div class="card-cover-bottom">
-        <button class="open-invitation-btn" id="openInvitationBtn">
+        <button class="open-invitation-btn" id="openInvitationBtn" aria-label="Mở thiệp mời">
           <span class="btn-sparkle">✨</span>
           <span class="btn-label">Mở Thiệp Mời</span>
           <span class="btn-sparkle">✨</span>
@@ -286,7 +278,7 @@
             </div>
           </div>
 
-          <!-- Invitation Card Image -->
+          <!-- Invitation Card Image with tap hint -->
           <div class="invitation-image-wrap">
             <img src="1.png" alt="Thiệp Mời Lễ Tốt Nghiệp Gia Vy" class="card-photo" id="invitePhoto">
           </div>
@@ -294,11 +286,17 @@
           <!-- Quick Event Utilities -->
           <div class="event-utilities">
             <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=L%E1%BB%85+T%E1%BB%91t+Nghi%E1%BB%87p+-+Nguy%E1%BB%85n+Gia+Vy&dates=20261122T023000Z/20261122T050000Z&details=L%E1%BB%85+trao+b%E1%BA%B1ng+t%E1%BB%91t+nghi%E1%BB%87p+Nguy%E1%BB%85n+Gia+Vy+-+Kh%C3%B3a+17+Ng%C3%A0nh+Marketing.+S%C4%90T%3A+0941653262&location=Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+C%C3%B4ng+nghi%E1%BB%87p+TP.HCM+-+12+Nguy%E1%BB%85n+V%C4%83n+B%E1%BA%A3o%2C+G%C3%B2+V%E1%BA%A5p%2C+TP.HCM" target="_blank" rel="noopener noreferrer" class="util-btn calendar-btn">
-              <span>📅 Thêm vào Lịch nhắc nhở</span>
+              <span>📅 Thêm vào Google Lịch</span>
             </a>
-            <button class="util-btn share-btn" id="shareBtn">
-              <span>🔗 Sao chép link thiệp</span>
-            </button>
+            
+            <div class="utility-row">
+              <a href="1.png" download="Thiep-Tot-Nghiep-Gia-Vy.png" class="util-btn download-btn" id="downloadCardBtn">
+                <span>📥 Tải thiệp về máy</span>
+              </a>
+              <button class="util-btn share-btn" id="shareBtn">
+                <span>🔗 Sao chép link</span>
+              </button>
+            </div>
           </div>
         </div>
 

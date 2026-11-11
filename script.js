@@ -1,11 +1,11 @@
 /**
- * GRADUATION INVITATION INTRO - MOBILE FIRST SAKURA EXPERIENCE
- * Pure JavaScript - Interactive Falling Petals, Sound, Modal Tabs & Image Switching
+ * GRADUATION INVITATION INTRO - WILDFLOWER MEADOW THEME
+ * Pure JavaScript - Interactive Falling Daisy Petals, Sound, Modal Tabs & Image Switching
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ========================================================
-     1. CANVAS SETUP FOR FLOATING SAKURA PETALS & SPARKLES
+     1. CANVAS SETUP FOR FLOATING DAISY PETALS & FAIRY DUST
      ======================================================== */
   const canvas = document.getElementById('petalCanvas');
   const ctx = canvas.getContext('2d');
@@ -23,21 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const isMobile = window.innerWidth < 768;
-  const PETAL_COUNT = isMobile ? 32 : 55;
-  const SPARKLE_COUNT = isMobile ? 22 : 40;
+  const PETAL_COUNT = isMobile ? 30 : 50;
+  const SPARKLE_COUNT = isMobile ? 20 : 36;
 
   const petals = [];
   const sparkles = [];
   const bursts = [];
 
+  // Wildflower Petal Colors (Daisies & soft pastel blush)
   const petalPalettes = [
-    { base: '255, 182, 193', tip: '255, 235, 240' },
-    { base: '255, 160, 185', tip: '255, 220, 230' },
-    { base: '248, 187, 208', tip: '255, 245, 248' },
-    { base: '255, 192, 203', tip: '255, 255, 255' }
+    { base: '255, 255, 255', tip: '255, 245, 248', isDaisy: true },  // Pure White Daisy
+    { base: '255, 248, 220', tip: '255, 255, 255', isDaisy: true },  // Cream Chamomile
+    { base: '255, 182, 193', tip: '255, 235, 240', isDaisy: false }, // Soft Rose
+    { base: '255, 209, 220', tip: '255, 250, 252', isDaisy: false }  // Blush Pink
   ];
 
-  class SakuraPetal {
+  class WildflowerPetal {
     constructor(isBurst = false, originX = 0, originY = 0) {
       this.reset(isBurst, originX, originY);
     }
@@ -56,13 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         this.x = Math.random() * (width + 80) - 40;
         this.y = Math.random() * -height * 0.8;
-        this.vx = Math.random() * 1.2 - 0.6;
-        this.vy = Math.random() * 1.3 + 0.9;
+        this.vx = Math.random() * 1.1 - 0.55;
+        this.vy = Math.random() * 1.2 + 0.85;
         this.isBurst = false;
         this.life = 1;
       }
 
-      this.size = Math.random() * 8 + 8;
+      this.size = Math.random() * 7 + 7;
       this.palette = petalPalettes[Math.floor(Math.random() * petalPalettes.length)];
       this.opacity = Math.random() * 0.35 + 0.65;
 
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       this.swayAngle += this.swaySpeed;
-      this.x += this.vx + Math.sin(this.swayAngle) * 1.1;
+      this.x += this.vx + Math.sin(this.swayAngle) * 1.0;
       this.y += this.vy;
       this.angle += this.angularSpeed;
       this.flipAngle += this.flipSpeed;
@@ -114,12 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
       grad.addColorStop(1, `rgba(${this.palette.base}, ${alpha})`);
       ctx.fillStyle = grad;
 
+      // Slender rounded daisy petal shape
       ctx.beginPath();
-      ctx.moveTo(0, this.size);
-      ctx.bezierCurveTo(this.size * 0.7, this.size * 0.4, this.size * 0.65, -this.size * 0.5, this.size * 0.25, -this.size * 0.9);
-      ctx.quadraticCurveTo(0, -this.size * 0.7, -this.size * 0.25, -this.size * 0.9);
-      ctx.bezierCurveTo(-this.size * 0.65, -this.size * 0.5, -this.size * 0.7, this.size * 0.4, 0, this.size);
+      ctx.ellipse(0, 0, this.size * 0.45, this.size, 0, 0, Math.PI * 2);
       ctx.fill();
+
+      // Subtle warm yellow stamen dusting on some petals
+      if (this.palette.isDaisy) {
+        ctx.fillStyle = `rgba(251, 192, 45, ${alpha * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(0, this.size * 0.65, this.size * 0.22, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       ctx.restore();
     }
@@ -166,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   for (let i = 0; i < PETAL_COUNT; i++) {
-    const p = new SakuraPetal();
+    const p = new WildflowerPetal();
     p.y = Math.random() * height;
     petals.push(p);
   }
@@ -205,9 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
      2. TOUCH & CLICK INTERACTION (PETAL BURST)
      ======================================================== */
   function triggerBurst(x, y) {
-    const burstCount = isMobile ? 12 : 18;
+    const burstCount = isMobile ? 14 : 20;
     for (let i = 0; i < burstCount; i++) {
-      bursts.push(new SakuraPetal(true, x, y));
+      bursts.push(new WildflowerPetal(true, x, y));
     }
     playGentleChime();
   }
@@ -243,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cy = rect.top + rect.height / 2;
 
     for (let i = 0; i < 30; i++) {
-      bursts.push(new SakuraPetal(true, cx, cy));
+      bursts.push(new WildflowerPetal(true, cx, cy));
     }
 
     invitationModal.classList.add('active');
@@ -304,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Time Pill Selection (9:30 vs 10:00 vs 10:30)
   const timePills = document.querySelectorAll('.time-pill');
   const invitePhoto = document.getElementById('invitePhoto');
+  const downloadCardBtn = document.getElementById('downloadCardBtn');
 
   timePills.forEach((pill) => {
     pill.addEventListener('click', (e) => {
@@ -318,6 +326,10 @@ document.addEventListener('DOMContentLoaded', () => {
           invitePhoto.src = imgSource;
           invitePhoto.style.opacity = '1';
         }, 140);
+
+        if (downloadCardBtn) {
+          downloadCardBtn.href = imgSource;
+        }
       }
     });
   });
@@ -348,14 +360,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ========================================================
-     4. REPLAY BLOOMING ANIMATION
+     4. REPLAY WILDFLOWER BLOOMING ANIMATION
      ======================================================== */
   function replayAnimation() {
     closeCard();
 
-    const stems = document.querySelectorAll('.branch-stem');
-    const leaves = document.querySelectorAll('.leaf-sprout');
-    const blooms = document.querySelectorAll('.bloom-container');
+    const stems = document.querySelectorAll('.meadow-stem');
+    const leaves = document.querySelectorAll('.meadow-leaf');
+    const blooms = document.querySelectorAll('.wildflower-bloom');
 
     [...stems, ...leaves, ...blooms].forEach((el) => {
       el.style.animation = 'none';
