@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Thiệp Tốt Nghiệp - Nguyễn Gia Vy</title>
+  <title>Thiệp Mời Tốt Nghiệp - Gia Vy</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
@@ -26,224 +26,207 @@
     <div class="dream-cloud cloud-bottom"></div>
   </div>
 
-  <!-- SVG Floral Branches & Blooming Flowers (Mobile-Optimized) -->
+  <!-- SVG Floral Branches & Lush Blooming Flowers (Mobile First) -->
   <div class="floral-overlay">
     
     <!-- SVG Defs for Petal Gradients & Shading -->
     <svg width="0" height="0" class="svg-definitions">
       <defs>
         <!-- Branch Wood Gradient -->
-        <linearGradient id="woodGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#5c3840"/>
-          <stop offset="50%" stop-color="#804d57"/>
-          <stop offset="100%" stop-color="#ab707b"/>
+        <linearGradient id="branchWood" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#4a2530"/>
+          <stop offset="50%" stop-color="#733b49"/>
+          <stop offset="100%" stop-color="#a6586b"/>
         </linearGradient>
 
-        <!-- Sakura Petal Gradient (White to vivid soft pink) -->
-        <linearGradient id="sakuraPetalGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stop-color="#ff9ebb"/>
-          <stop offset="50%" stop-color="#ffc6d7"/>
+        <!-- Sakura Petal Gradient (Vibrant soft pink) -->
+        <linearGradient id="sakuraGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#ff7597"/>
+          <stop offset="50%" stop-color="#ffb3c6"/>
           <stop offset="100%" stop-color="#ffffff"/>
         </linearGradient>
 
-        <!-- Sakura Petal Darker Gradient (For depth) -->
-        <linearGradient id="sakuraPetalDeep" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stop-color="#f06292"/>
-          <stop offset="60%" stop-color="#ffadc6"/>
-          <stop offset="100%" stop-color="#fff5f8"/>
+        <!-- Sakura Petal Deep Gradient -->
+        <linearGradient id="sakuraGradDeep" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#e91e63"/>
+          <stop offset="50%" stop-color="#f48fb1"/>
+          <stop offset="100%" stop-color="#fff0f5"/>
         </linearGradient>
 
         <!-- Leaf Gradient -->
         <linearGradient id="leafGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#558b2f"/>
-          <stop offset="100%" stop-color="#8bc34a"/>
+          <stop offset="0%" stop-color="#43a047"/>
+          <stop offset="100%" stop-color="#81c784"/>
         </linearGradient>
 
-        <!-- Golden Flower Pistil -->
-        <radialGradient id="goldPistil" cx="50%" cy="50%" r="50%">
+        <!-- Golden Pistil Core -->
+        <radialGradient id="goldCore" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stop-color="#ffe082"/>
           <stop offset="60%" stop-color="#ffb300"/>
           <stop offset="100%" stop-color="#e65100"/>
         </radialGradient>
 
-        <!-- Full Cherry Blossom Definition -->
-        <g id="cherryBlossom">
+        <!-- Beautiful 5-Petal Sakura Blossom Symbol -->
+        <g id="blossomFlower">
           <!-- 5 Sakura Petals with heart-notched tips -->
-          <g class="sakura-petals">
-            <!-- Petal 1 (Top) -->
-            <path d="M 0 0 C -9 -8 -13 -20 -4 -28 C -1 -25 1 -25 4 -28 C 13 -20 9 -8 0 0 Z" fill="url(#sakuraPetalGrad)" />
-            <!-- Petal 2 (Top-Right) -->
-            <path d="M 0 0 C -9 -8 -13 -20 -4 -28 C -1 -25 1 -25 4 -28 C 13 -20 9 -8 0 0 Z" fill="url(#sakuraPetalDeep)" transform="rotate(72)" />
-            <!-- Petal 3 (Bottom-Right) -->
-            <path d="M 0 0 C -9 -8 -13 -20 -4 -28 C -1 -25 1 -25 4 -28 C 13 -20 9 -8 0 0 Z" fill="url(#sakuraPetalGrad)" transform="rotate(144)" />
-            <!-- Petal 4 (Bottom-Left) -->
-            <path d="M 0 0 C -9 -8 -13 -20 -4 -28 C -1 -25 1 -25 4 -28 C 13 -20 9 -8 0 0 Z" fill="url(#sakuraPetalGrad)" transform="rotate(216)" />
-            <!-- Petal 5 (Top-Left) -->
-            <path d="M 0 0 C -9 -8 -13 -20 -4 -28 C -1 -25 1 -25 4 -28 C 13 -20 9 -8 0 0 Z" fill="url(#sakuraPetalDeep)" transform="rotate(288)" />
+          <g class="petals-group">
+            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGrad)" />
+            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGradDeep)" transform="rotate(72)" />
+            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGrad)" transform="rotate(144)" />
+            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGradDeep)" transform="rotate(216)" />
+            <path d="M 0 0 C -10 -9 -14 -22 -4 -30 C -1 -27 1 -27 4 -30 C 14 -22 10 -9 0 0 Z" fill="url(#sakuraGrad)" transform="rotate(288)" />
           </g>
 
-          <!-- Flower Stamens & Center Pistil -->
-          <g class="sakura-center">
-            <!-- Radiating Stamen Filaments -->
+          <!-- Golden Stamens & Pistils -->
+          <g class="pistil-group">
             <circle cx="0" cy="0" r="5" fill="#f06292" opacity="0.6"/>
-            <line x1="0" y1="0" x2="0" y2="-9" stroke="#ffa726" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="0" cy="-9.5" r="1.5" fill="#ffb300"/>
-            
-            <line x1="0" y1="0" x2="8.5" y2="-2.8" stroke="#ffa726" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="9" cy="-3" r="1.5" fill="#ffb300"/>
-            
-            <line x1="0" y1="0" x2="5.3" y2="7.3" stroke="#ffa726" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="5.6" cy="7.7" r="1.5" fill="#ffb300"/>
-            
-            <line x1="0" y1="0" x2="-5.3" y2="7.3" stroke="#ffa726" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="-5.6" cy="7.7" r="1.5" fill="#ffb300"/>
-            
-            <line x1="0" y1="0" x2="-8.5" y2="-2.8" stroke="#ffa726" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="-9" cy="-3" r="1.5" fill="#ffb300"/>
-
-            <!-- Center Gold Glow -->
-            <circle cx="0" cy="0" r="3.5" fill="url(#goldPistil)"/>
+            <!-- Stamen dots -->
+            <line x1="0" y1="0" x2="0" y2="-10" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="0" cy="-11" r="1.6" fill="#ffb300"/>
+            <line x1="0" y1="0" x2="9.5" y2="-3" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="10.5" cy="-3.3" r="1.6" fill="#ffb300"/>
+            <line x1="0" y1="0" x2="6" y2="8" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="6.5" cy="8.8" r="1.6" fill="#ffb300"/>
+            <line x1="0" y1="0" x2="-6" y2="8" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="-6.5" cy="8.8" r="1.6" fill="#ffb300"/>
+            <line x1="0" y1="0" x2="-9.5" y2="-3" stroke="#ffa726" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="-10.5" cy="-3.3" r="1.6" fill="#ffb300"/>
+            <!-- Center Gold Orb -->
+            <circle cx="0" cy="0" r="3.8" fill="url(#goldCore)"/>
           </g>
         </g>
 
-        <!-- Flower Bud Definition -->
-        <g id="flowerBud">
-          <ellipse cx="0" cy="-10" rx="7" ry="12" fill="url(#sakuraPetalDeep)"/>
-          <ellipse cx="2" cy="-9" rx="5" ry="9" fill="url(#sakuraPetalGrad)"/>
-          <path d="M -4 0 Q 0 -4 4 0 Q 0 4 -4 0 Z" fill="#558b2f"/>
+        <!-- Flower Bud Symbol -->
+        <g id="blossomBud">
+          <ellipse cx="0" cy="-11" rx="8" ry="14" fill="url(#sakuraGradDeep)"/>
+          <ellipse cx="2" cy="-10" rx="5" ry="10" fill="url(#sakuraGrad)"/>
+          <path d="M -5 0 Q 0 -5 5 0 Q 0 5 -5 0 Z" fill="#43a047"/>
         </g>
       </defs>
     </svg>
 
-    <!-- Top Left Draping Cherry Branch -->
-    <svg class="floral-svg branch-top-left" viewBox="0 0 350 350" fill="none">
-      <!-- Main Branch -->
-      <path class="branch-path branch-delay-1" d="M -20 -10 C 60 40 120 70 170 140 C 200 180 215 230 220 270" stroke="url(#woodGradient)" stroke-width="5" stroke-linecap="round"/>
-      <path class="branch-path branch-delay-2" d="M 120 70 C 160 65 210 90 250 120" stroke="url(#woodGradient)" stroke-width="3" stroke-linecap="round"/>
-      <path class="branch-path branch-delay-3" d="M 60 40 C 90 100 110 135 125 180" stroke="url(#woodGradient)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Top Left Draping Cherry Blossom Branch -->
+    <svg class="floral-svg branch-top-left" viewBox="0 0 340 340" fill="none">
+      <path class="branch-stem branch-d1" d="M -15 -10 C 60 30 110 60 160 120 C 190 160 205 200 215 250" stroke="url(#branchWood)" stroke-width="5" stroke-linecap="round"/>
+      <path class="branch-stem branch-d2" d="M 110 60 C 150 55 195 75 235 110" stroke="url(#branchWood)" stroke-width="3" stroke-linecap="round"/>
+      <path class="branch-stem branch-d3" d="M 60 30 C 85 85 105 125 120 165" stroke="url(#branchWood)" stroke-width="2.5" stroke-linecap="round"/>
 
       <!-- Leaves -->
-      <g class="leaf-elem leaf-d1" transform="translate(100, 60) rotate(-40)">
+      <g class="leaf-sprout leaf-d1" transform="translate(95, 50) rotate(-40)">
         <path d="M 0 0 C 10 -15 25 -15 30 0 C 25 15 10 15 0 0 Z" fill="url(#leafGrad)"/>
       </g>
-      <g class="leaf-elem leaf-d2" transform="translate(185, 160) rotate(35)">
+      <g class="leaf-sprout leaf-d2" transform="translate(180, 150) rotate(35)">
         <path d="M 0 0 C 8 -12 20 -12 24 0 C 20 12 8 12 0 0 Z" fill="url(#leafGrad)"/>
       </g>
-      <g class="leaf-elem leaf-d3" transform="translate(145, 75) rotate(-20)">
-        <path d="M 0 0 C 7 -10 18 -10 22 0 C 18 10 7 10 0 0 Z" fill="url(#leafGrad)"/>
-      </g>
 
-      <!-- Flowers on Top-Left Branch -->
-      <g transform="translate(220, 270)">
-        <g class="flower-bloom bloom-d1 scale-large">
-          <use href="#cherryBlossom" />
+      <!-- Flowers -->
+      <g transform="translate(215, 250)">
+        <g class="bloom-container bloom-d1 bloom-lg">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(250, 120)">
-        <g class="flower-bloom bloom-d2 scale-medium">
-          <use href="#cherryBlossom" />
+      <g transform="translate(235, 110)">
+        <g class="bloom-container bloom-d2 bloom-md">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(170, 140)">
-        <g class="flower-bloom bloom-d3 scale-large">
-          <use href="#cherryBlossom" />
+      <g transform="translate(160, 120)">
+        <g class="bloom-container bloom-d3 bloom-lg">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(125, 180)">
-        <g class="flower-bloom bloom-d4 scale-small">
-          <use href="#cherryBlossom" />
+      <g transform="translate(120, 165)">
+        <g class="bloom-container bloom-d4 bloom-sm">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(195, 210) rotate(-30)">
-        <g class="flower-bloom bloom-d2">
-          <use href="#flowerBud" />
+      <g transform="translate(185, 190) rotate(-30)">
+        <g class="bloom-container bloom-d2">
+          <use href="#blossomBud"/>
         </g>
       </g>
     </svg>
 
-    <!-- Bottom Left Growing Branch -->
-    <svg class="floral-svg branch-bottom-left" viewBox="0 0 380 440" fill="none">
-      <path class="branch-path branch-delay-1" d="M -15 450 C 50 360 85 270 120 180 C 145 120 180 80 230 40" stroke="url(#woodGradient)" stroke-width="6" stroke-linecap="round"/>
-      <path class="branch-path branch-delay-2" d="M 85 270 C 135 250 170 240 225 220" stroke="url(#woodGradient)" stroke-width="3.5" stroke-linecap="round"/>
-      <path class="branch-path branch-delay-3" d="M 120 180 C 100 130 90 90 80 50" stroke="url(#woodGradient)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Bottom Left Growing Cherry Blossom Branch -->
+    <svg class="floral-svg branch-bottom-left" viewBox="0 0 360 420" fill="none">
+      <path class="branch-stem branch-d1" d="M -15 430 C 45 340 80 260 115 170 C 140 110 170 70 220 30" stroke="url(#branchWood)" stroke-width="6" stroke-linecap="round"/>
+      <path class="branch-stem branch-d2" d="M 80 260 C 130 240 165 230 215 210" stroke="url(#branchWood)" stroke-width="3.5" stroke-linecap="round"/>
+      <path class="branch-stem branch-d3" d="M 115 170 C 95 120 85 85 75 45" stroke="url(#branchWood)" stroke-width="2.5" stroke-linecap="round"/>
 
       <!-- Leaves -->
-      <g class="leaf-elem leaf-d1" transform="translate(75, 290) rotate(-65)">
+      <g class="leaf-sprout leaf-d1" transform="translate(70, 280) rotate(-65)">
         <path d="M 0 0 C 10 -15 25 -15 30 0 C 25 15 10 15 0 0 Z" fill="url(#leafGrad)"/>
       </g>
-      <g class="leaf-elem leaf-d2" transform="translate(150, 140) rotate(20)">
+      <g class="leaf-sprout leaf-d2" transform="translate(140, 130) rotate(20)">
         <path d="M 0 0 C 9 -13 22 -13 26 0 C 22 13 9 13 0 0 Z" fill="url(#leafGrad)"/>
       </g>
-      <g class="leaf-elem leaf-d3" transform="translate(175, 235) rotate(-35)">
-        <path d="M 0 0 C 8 -12 20 -12 24 0 C 20 12 8 12 0 0 Z" fill="url(#leafGrad)"/>
-      </g>
 
-      <!-- Flowers on Bottom-Left Branch -->
-      <g transform="translate(230, 40)">
-        <g class="flower-bloom bloom-d2 scale-large">
-          <use href="#cherryBlossom" />
+      <!-- Flowers -->
+      <g transform="translate(220, 30)">
+        <g class="bloom-container bloom-d2 bloom-lg">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(225, 220)">
-        <g class="flower-bloom bloom-d1 scale-large">
-          <use href="#cherryBlossom" />
+      <g transform="translate(215, 210)">
+        <g class="bloom-container bloom-d1 bloom-lg">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(135, 160)">
-        <g class="flower-bloom bloom-d3 scale-medium">
-          <use href="#cherryBlossom" />
+      <g transform="translate(125, 150)">
+        <g class="bloom-container bloom-d3 bloom-md">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(80, 50)">
-        <g class="flower-bloom bloom-d4 scale-small">
-          <use href="#cherryBlossom" />
+      <g transform="translate(75, 45)">
+        <g class="bloom-container bloom-d4 bloom-sm">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(170, 95) rotate(45)">
-        <g class="flower-bloom bloom-d1">
-          <use href="#flowerBud" />
+      <g transform="translate(160, 90) rotate(45)">
+        <g class="bloom-container bloom-d1">
+          <use href="#blossomBud"/>
         </g>
       </g>
     </svg>
 
-    <!-- Bottom Right Growing Branch -->
-    <svg class="floral-svg branch-bottom-right" viewBox="0 0 380 440" fill="none">
-      <path class="branch-path branch-delay-1" d="M 395 450 C 330 360 295 270 260 180 C 235 120 200 80 150 40" stroke="url(#woodGradient)" stroke-width="6" stroke-linecap="round"/>
-      <path class="branch-path branch-delay-2" d="M 295 270 C 245 250 210 240 155 220" stroke="url(#woodGradient)" stroke-width="3.5" stroke-linecap="round"/>
-      <path class="branch-path branch-delay-3" d="M 260 180 C 280 130 290 90 300 50" stroke="url(#woodGradient)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Bottom Right Growing Cherry Blossom Branch -->
+    <svg class="floral-svg branch-bottom-right" viewBox="0 0 360 420" fill="none">
+      <path class="branch-stem branch-d1" d="M 375 430 C 315 340 280 260 245 170 C 220 110 190 70 140 30" stroke="url(#branchWood)" stroke-width="6" stroke-linecap="round"/>
+      <path class="branch-stem branch-d2" d="M 280 260 C 230 240 195 230 145 210" stroke="url(#branchWood)" stroke-width="3.5" stroke-linecap="round"/>
+      <path class="branch-stem branch-d3" d="M 245 170 C 265 120 275 85 285 45" stroke="url(#branchWood)" stroke-width="2.5" stroke-linecap="round"/>
 
       <!-- Leaves -->
-      <g class="leaf-elem leaf-d1" transform="translate(305, 290) rotate(65)">
+      <g class="leaf-sprout leaf-d1" transform="translate(290, 280) rotate(65)">
         <path d="M 0 0 C -10 -15 -25 -15 -30 0 C -25 15 -10 15 0 0 Z" fill="url(#leafGrad)"/>
       </g>
-      <g class="leaf-elem leaf-d2" transform="translate(230, 140) rotate(-20)">
+      <g class="leaf-sprout leaf-d2" transform="translate(220, 130) rotate(-20)">
         <path d="M 0 0 C -9 -13 -22 -13 -26 0 C -22 13 -9 13 0 0 Z" fill="url(#leafGrad)"/>
       </g>
 
-      <!-- Flowers on Bottom-Right Branch -->
-      <g transform="translate(150, 40)">
-        <g class="flower-bloom bloom-d1 scale-large">
-          <use href="#cherryBlossom" />
+      <!-- Flowers -->
+      <g transform="translate(140, 30)">
+        <g class="bloom-container bloom-d1 bloom-lg">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(155, 220)">
-        <g class="flower-bloom bloom-d3 scale-large">
-          <use href="#cherryBlossom" />
+      <g transform="translate(145, 210)">
+        <g class="bloom-container bloom-d3 bloom-lg">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(245, 160)">
-        <g class="flower-bloom bloom-d2 scale-medium">
-          <use href="#cherryBlossom" />
+      <g transform="translate(235, 150)">
+        <g class="bloom-container bloom-d2 bloom-md">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(300, 50)">
-        <g class="flower-bloom bloom-d4 scale-small">
-          <use href="#cherryBlossom" />
+      <g transform="translate(285, 45)">
+        <g class="bloom-container bloom-d4 bloom-sm">
+          <use href="#blossomFlower"/>
         </g>
       </g>
-      <g transform="translate(210, 95) rotate(-45)">
-        <g class="flower-bloom bloom-d2">
-          <use href="#flowerBud" />
+      <g transform="translate(200, 90) rotate(-45)">
+        <g class="bloom-container bloom-d2">
+          <use href="#blossomBud"/>
         </g>
       </g>
     </svg>
@@ -251,30 +234,16 @@
 
   <!-- Central Mobile Intro Card -->
   <main class="intro-screen">
-    <div class="glass-card" id="mainIntroCard">
+    <div class="intro-card" id="mainIntroCard">
       
-      <!-- Top Decorative Ribbon / Cap -->
-      <div class="cap-emblem">
-        <div class="emblem-glow"></div>
-        <div class="cap-circle">
-          <!-- Graduation Cap Icon -->
-          <svg class="cap-icon" viewBox="0 0 64 64" fill="none">
-            <path d="M32 10 L58 23 L32 36 L6 23 Z" fill="url(#goldGrad)" stroke="#c27d38" stroke-width="1.5"/>
-            <path d="M16 28 V42 C16 48 48 48 48 42 V28" stroke="url(#goldGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <path d="M52 26 V44 Q52 46 54 48 L56 46" stroke="#f6c28b" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="56" cy="48" r="2.5" fill="#e6a15c"/>
-            <defs>
-              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#fff2db"/>
-                <stop offset="50%" stop-color="#f5be86"/>
-                <stop offset="100%" stop-color="#cf8438"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
+      <!-- Envelope Cover Thumbnail (5.png) -->
+      <div class="cover-preview-wrapper" id="coverPreview">
+        <div class="cover-glow"></div>
+        <img src="5.png" alt="Thiệp Mời Tốt Nghiệp" class="cover-image" id="coverImage">
+        <div class="stamp-badge">🎓</div>
       </div>
 
-      <!-- Content Titles -->
+      <!-- Typography -->
       <div class="card-headings">
         <span class="sub-greeting">✦ LỄ TỐT NGHIỆP ✦</span>
         <h1 class="main-title">
@@ -292,7 +261,7 @@
 
         <p class="emotional-quote">
           "Mỗi đóa hoa nở rộ là một ước mơ thành hình.<br>
-          Cảm ơn bạn đã luôn đồng hành cùng hành trình rực rỡ này!"
+          Thương mời bạn đến chung vui ngày tốt nghiệp cùng mình!"
         </p>
       </div>
 
@@ -300,71 +269,76 @@
       <div class="action-container">
         <button class="open-invitation-btn" id="openInvitationBtn">
           <span class="btn-sparkle">✨</span>
-          <span class="btn-label">Mở Thiệp Mừng</span>
+          <span class="btn-label">Mở Thiệp Mời</span>
           <span class="btn-sparkle">✨</span>
           <div class="btn-light-sweep"></div>
         </button>
       </div>
 
-      <!-- Hint -->
+      <!-- Touch Hint -->
       <p class="touch-hint">Chạm vào màn hình để thả hoa rơi</p>
     </div>
   </main>
 
-  <!-- Fullscreen Modal / Mobile Envelope Card -->
+  <!-- Fullscreen Modal / Multi-Page Invitation (Mobile Optimized) -->
   <section class="modal-invitation" id="invitationModal" aria-hidden="true">
     <div class="modal-backdrop" id="modalBackdrop"></div>
-    <div class="modal-wrapper">
-      <div class="envelope-card">
+    <div class="modal-container">
+      
+      <!-- Navigation / Tab Header -->
+      <div class="modal-nav">
+        <button class="nav-tab active" data-tab="tab-invite">💌 Thiệp Mời</button>
+        <button class="nav-tab" data-tab="tab-map">🗺️ Sơ Đồ & Chỉ Đường</button>
         <button class="btn-close-modal" id="closeModalBtn" aria-label="Đóng">&times;</button>
+      </div>
+
+      <!-- Scrollable Content Area -->
+      <div class="modal-scroll-area">
         
-        <!-- Header Tag -->
-        <div class="envelope-header">
-          <span class="golden-tag">LỜI MỜI TRÂN TRỌNG</span>
-          <h2 class="modal-title">Lễ Trao Bằng Tốt Nghiệp</h2>
-          <div class="gold-bar"></div>
-        </div>
-
-        <div class="envelope-body">
-          <p class="lead-invite">Thân mời Bạn đến chung vui cùng</p>
-          <h3 class="honoree-name">Nguyễn Gia Vy</h3>
-
-          <!-- Details Grid -->
-          <div class="details-box">
-            <div class="detail-row">
-              <span class="detail-icon">📅</span>
-              <div class="detail-content">
-                <strong>Thời gian</strong>
-                <p>08:30 — Thứ Bảy, 28/11/2026</p>
-              </div>
-            </div>
-
-            <div class="detail-row">
-              <span class="detail-icon">📍</span>
-              <div class="detail-content">
-                <strong>Địa điểm</strong>
-                <p>Hội Trường A — Đại Học Quốc Gia</p>
-              </div>
-            </div>
-
-            <div class="detail-row">
-              <span class="detail-icon">👗</span>
-              <div class="detail-content">
-                <strong>Dresscode</strong>
-                <p>Trắng / Hồng Pastel / Tự do rạng rỡ</p>
-              </div>
+        <!-- Tab 1: Invitation Card (1.png / 2.png / 3.png) -->
+        <div class="tab-pane active" id="tab-invite">
+          <!-- Time Slot Selector -->
+          <div class="time-selector">
+            <span class="selector-label">Chọn khung giờ dự lễ:</span>
+            <div class="time-pills">
+              <button class="time-pill active" data-img="1.png">09:30</button>
+              <button class="time-pill" data-img="2.png">10:00</button>
+              <button class="time-pill" data-img="3.png">10:30</button>
             </div>
           </div>
 
-          <p class="sincere-message">
-            "Sự hiện diện của bạn là niềm vinh hạnh và kỷ niệm đáng nhớ nhất trong ngày tốt nghiệp của mình!"
-          </p>
+          <!-- Invitation Card Image -->
+          <div class="invitation-image-wrap">
+            <img src="1.png" alt="Thiệp Mời Lễ Tốt Nghiệp Gia Vy" class="card-photo" id="invitePhoto">
+          </div>
         </div>
 
-        <div class="envelope-footer">
-          <button class="btn-replay" id="replayBtn">🌸 Xem lại hiệu ứng nở hoa</button>
+        <!-- Tab 2: Map & Instructions (4.png) -->
+        <div class="tab-pane" id="tab-map">
+          <div class="map-image-wrap">
+            <img src="4.png" alt="Sơ đồ tòa nhà Đại học Công nghiệp TPHCM" class="card-photo">
+          </div>
+
+          <!-- Quick Action Buttons for Guests -->
+          <div class="quick-contact-actions">
+            <a href="tel:0941653262" class="action-link link-call">
+              <span class="link-icon">📞</span>
+              <span>Gọi cho Vy (0941 653 262)</span>
+            </a>
+            <a href="https://maps.google.com/?q=12+Nguyen+Van+Bao+Phuong+4+Go+Vap+Ho+Chi+Minh" target="_blank" rel="noopener noreferrer" class="action-link link-maps">
+              <span class="link-icon">📍</span>
+              <span>Mở Google Maps chỉ đường</span>
+            </a>
+          </div>
         </div>
+
       </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer-bar">
+        <button class="btn-replay" id="replayBtn">🌸 Xem lại Intro nở hoa</button>
+      </div>
+      
     </div>
   </section>
 

@@ -1,11 +1,11 @@
 /**
  * GRADUATION INVITATION INTRO - MOBILE FIRST SAKURA EXPERIENCE
- * Pure JavaScript - No dependencies
+ * Pure JavaScript - Interactive Falling Petals, Sound, Modal Tabs & Image Switching
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ========================================================
-     1. CANVAS SETUP FOR FLOATING PETALS & FAIRY DUST
+     1. CANVAS SETUP FOR FLOATING SAKURA PETALS & SPARKLES
      ======================================================== */
   const canvas = document.getElementById('petalCanvas');
   const ctx = canvas.getContext('2d');
@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(resizeCanvas, 150);
   });
 
-  // Adjust particle count for mobile vs desktop
   const isMobile = window.innerWidth < 768;
   const PETAL_COUNT = isMobile ? 32 : 55;
   const SPARKLE_COUNT = isMobile ? 22 : 40;
@@ -31,12 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const sparkles = [];
   const bursts = [];
 
-  // Soft Sakura Petal Colors
   const petalPalettes = [
-    { base: '255, 182, 193', tip: '255, 235, 240' }, // Classic Light Pink
-    { base: '255, 160, 185', tip: '255, 220, 230' }, // Rose Pink
-    { base: '248, 187, 208', tip: '255, 245, 248' }, // Sakura Soft
-    { base: '255, 192, 203', tip: '255, 255, 255' }  // White Blush
+    { base: '255, 182, 193', tip: '255, 235, 240' },
+    { base: '255, 160, 185', tip: '255, 220, 230' },
+    { base: '248, 187, 208', tip: '255, 245, 248' },
+    { base: '255, 192, 203', tip: '255, 255, 255' }
   ];
 
   class SakuraPetal {
@@ -64,17 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
         this.life = 1;
       }
 
-      this.size = Math.random() * 8 + 8; // 8px to 16px
+      this.size = Math.random() * 8 + 8;
       this.palette = petalPalettes[Math.floor(Math.random() * petalPalettes.length)];
       this.opacity = Math.random() * 0.35 + 0.65;
 
-      // 3D rotation angles
       this.angle = Math.random() * Math.PI * 2;
       this.angularSpeed = (Math.random() - 0.5) * 0.025;
       this.flipAngle = Math.random() * Math.PI * 2;
       this.flipSpeed = Math.random() * 0.035 + 0.02;
 
-      // Wind oscillation
       this.swayAngle = Math.random() * Math.PI * 2;
       this.swaySpeed = Math.random() * 0.025 + 0.015;
     }
@@ -84,21 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
         this.x += this.vx;
         this.y += this.vy;
         this.vx *= 0.96;
-        this.vy += 0.07; // gravity
+        this.vy += 0.07;
         this.life -= this.decay;
         this.angle += this.angularSpeed * 2.5;
         this.flipAngle += this.flipSpeed * 2;
         return this.life > 0;
       }
 
-      // Normal drift
       this.swayAngle += this.swaySpeed;
       this.x += this.vx + Math.sin(this.swayAngle) * 1.1;
       this.y += this.vy;
       this.angle += this.angularSpeed;
       this.flipAngle += this.flipSpeed;
 
-      // Respawn when fallen past viewport
       if (this.y > height + 30 || this.x < -60 || this.x > width + 60) {
         this.reset();
       }
@@ -110,19 +104,16 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.translate(this.x, this.y);
       ctx.rotate(this.angle);
 
-      // 3D flip effect
       const flipScale = Math.sin(this.flipAngle);
       ctx.scale(flipScale, 1);
 
       const alpha = this.isBurst ? this.opacity * this.life : this.opacity;
 
-      // Gradient fill from tip to base
       const grad = ctx.createLinearGradient(0, -this.size, 0, this.size);
       grad.addColorStop(0, `rgba(${this.palette.tip}, ${alpha})`);
       grad.addColorStop(1, `rgba(${this.palette.base}, ${alpha})`);
       ctx.fillStyle = grad;
 
-      // Notched sakura petal path
       ctx.beginPath();
       ctx.moveTo(0, this.size);
       ctx.bezierCurveTo(this.size * 0.7, this.size * 0.4, this.size * 0.65, -this.size * 0.5, this.size * 0.25, -this.size * 0.9);
@@ -134,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Fairy Dust / Golden Sparkles
   class FairySparkle {
     constructor() {
       this.reset();
@@ -175,10 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Populate particles
   for (let i = 0; i < PETAL_COUNT; i++) {
     const p = new SakuraPetal();
-    p.y = Math.random() * height; // scatter evenly at start
+    p.y = Math.random() * height;
     petals.push(p);
   }
 
@@ -186,23 +175,19 @@ document.addEventListener('DOMContentLoaded', () => {
     sparkles.push(new FairySparkle());
   }
 
-  // Animation Loop
   function renderScene() {
     ctx.clearRect(0, 0, width, height);
 
-    // Sparkles behind
     for (let i = 0; i < sparkles.length; i++) {
       sparkles[i].update();
       sparkles[i].draw();
     }
 
-    // Continuous floating petals
     for (let i = 0; i < petals.length; i++) {
       petals[i].update();
       petals[i].draw();
     }
 
-    // Interactive burst petals
     for (let i = bursts.length - 1; i >= 0; i--) {
       const b = bursts[i];
       if (!b.update()) {
@@ -228,22 +213,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.addEventListener('click', (e) => {
-    if (e.target.closest('.envelope-card')) return;
+    if (e.target.closest('.modal-container')) return;
     triggerBurst(e.clientX, e.clientY);
   });
 
   window.addEventListener('touchstart', (e) => {
     if (e.touches && e.touches[0]) {
-      if (e.target.closest('.envelope-card')) return;
+      if (e.target.closest('.modal-container')) return;
       const touch = e.touches[0];
       triggerBurst(touch.clientX, touch.clientY);
     }
   }, { passive: true });
 
   /* ========================================================
-     3. MODAL CARD OPEN / CLOSE
+     3. INVITATION MODAL (OPEN / CLOSE / TABS)
      ======================================================== */
   const openBtn = document.getElementById('openInvitationBtn');
+  const coverPreview = document.getElementById('coverPreview');
   const closeBtn = document.getElementById('closeModalBtn');
   const modalBackdrop = document.getElementById('modalBackdrop');
   const invitationModal = document.getElementById('invitationModal');
@@ -273,6 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
     openCard();
   });
 
+  if (coverPreview) {
+    coverPreview.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openCard();
+    });
+  }
+
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     closeCard();
@@ -286,21 +279,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Tab switching (Thiệp Mời vs Sơ Đồ)
+  const navTabs = document.querySelectorAll('.nav-tab');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+
+  navTabs.forEach((tab) => {
+    tab.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetId = tab.getAttribute('data-tab');
+
+      navTabs.forEach((t) => t.classList.remove('active'));
+      tabPanes.forEach((p) => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) targetPane.classList.add('active');
+    });
+  });
+
+  // Time Pill Selection (9:30 vs 10:00 vs 10:30)
+  const timePills = document.querySelectorAll('.time-pill');
+  const invitePhoto = document.getElementById('invitePhoto');
+
+  timePills.forEach((pill) => {
+    pill.addEventListener('click', (e) => {
+      e.stopPropagation();
+      timePills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const imgSource = pill.getAttribute('data-img');
+      if (invitePhoto && imgSource) {
+        invitePhoto.style.opacity = '0.4';
+        setTimeout(() => {
+          invitePhoto.src = imgSource;
+          invitePhoto.style.opacity = '1';
+        }, 150);
+      }
+    });
+  });
+
   /* ========================================================
      4. REPLAY BLOOMING ANIMATION
      ======================================================== */
   function replayAnimation() {
     closeCard();
 
-    const branches = document.querySelectorAll('.branch-path');
-    const leaves = document.querySelectorAll('.leaf-elem');
-    const blooms = document.querySelectorAll('.flower-bloom');
+    const stems = document.querySelectorAll('.branch-stem');
+    const leaves = document.querySelectorAll('.leaf-sprout');
+    const blooms = document.querySelectorAll('.bloom-container');
     const introCard = document.getElementById('mainIntroCard');
 
-    // Trigger reflow to restart CSS keyframes
-    [...branches, ...leaves, ...blooms].forEach((el) => {
+    [...stems, ...leaves, ...blooms].forEach((el) => {
       el.style.animation = 'none';
-      el.offsetHeight; // Reflow
+      el.offsetHeight; // force reflow
       el.style.animation = '';
     });
 
