@@ -1,11 +1,11 @@
 /**
- * GRADUATION INVITATION INTRO - WILDFLOWER MEADOW THEME
- * Pure JavaScript - Interactive Falling Daisy Petals, Sound, Modal Tabs & Image Switching
+ * GRADUATION INVITATION INTRO - AESTHETIC STICKERS & 3D WAX SEAL ENVELOPE
+ * Pure JavaScript - Interactive Envelope Flap, Petals, Audio, Modal Tabs & Image Switching
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ========================================================
-     1. CANVAS SETUP FOR FLOATING DAISY PETALS & FAIRY DUST
+     1. CANVAS SETUP FOR FLOATING SPARKLES & SOFT PETALS
      ======================================================== */
   const canvas = document.getElementById('petalCanvas');
   const ctx = canvas.getContext('2d');
@@ -23,22 +23,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const isMobile = window.innerWidth < 768;
-  const PETAL_COUNT = isMobile ? 30 : 50;
-  const SPARKLE_COUNT = isMobile ? 20 : 36;
+  const SPARKLE_COUNT = isMobile ? 22 : 36;
+  const PETAL_COUNT = isMobile ? 18 : 28;
 
-  const petals = [];
   const sparkles = [];
+  const petals = [];
   const bursts = [];
 
-  // Wildflower Petal Colors (Daisies & soft pastel blush)
   const petalPalettes = [
-    { base: '255, 255, 255', tip: '255, 245, 248', isDaisy: true },  // Pure White Daisy
-    { base: '255, 248, 220', tip: '255, 255, 255', isDaisy: true },  // Cream Chamomile
-    { base: '255, 182, 193', tip: '255, 235, 240', isDaisy: false }, // Soft Rose
-    { base: '255, 209, 220', tip: '255, 250, 252', isDaisy: false }  // Blush Pink
+    { base: '255, 182, 193', tip: '255, 240, 245' }, // Soft Rose
+    { base: '255, 255, 255', tip: '255, 245, 248' }, // Ivory White
+    { base: '255, 209, 220', tip: '255, 250, 252' }  // Blush Pink
   ];
 
-  class WildflowerPetal {
+  class FloatingPetal {
     constructor(isBurst = false, originX = 0, originY = 0) {
       this.reset(isBurst, originX, originY);
     }
@@ -48,32 +46,32 @@ document.addEventListener('DOMContentLoaded', () => {
         this.x = originX;
         this.y = originY;
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 4.5 + 2.5;
+        const speed = Math.random() * 5 + 3;
         this.vx = Math.cos(angle) * speed;
         this.vy = Math.sin(angle) * speed - 1.5;
         this.isBurst = true;
         this.life = 1;
         this.decay = Math.random() * 0.015 + 0.01;
       } else {
-        this.x = Math.random() * (width + 80) - 40;
+        this.x = Math.random() * (width + 60) - 30;
         this.y = Math.random() * -height * 0.8;
-        this.vx = Math.random() * 1.1 - 0.55;
-        this.vy = Math.random() * 1.2 + 0.85;
+        this.vx = Math.random() * 1.0 - 0.5;
+        this.vy = Math.random() * 1.1 + 0.7;
         this.isBurst = false;
         this.life = 1;
       }
 
-      this.size = Math.random() * 7 + 7;
+      this.size = Math.random() * 6 + 6;
       this.palette = petalPalettes[Math.floor(Math.random() * petalPalettes.length)];
-      this.opacity = Math.random() * 0.35 + 0.65;
+      this.opacity = Math.random() * 0.3 + 0.6;
 
       this.angle = Math.random() * Math.PI * 2;
       this.angularSpeed = (Math.random() - 0.5) * 0.025;
       this.flipAngle = Math.random() * Math.PI * 2;
-      this.flipSpeed = Math.random() * 0.035 + 0.02;
+      this.flipSpeed = Math.random() * 0.03 + 0.02;
 
       this.swayAngle = Math.random() * Math.PI * 2;
-      this.swaySpeed = Math.random() * 0.025 + 0.015;
+      this.swaySpeed = Math.random() * 0.02 + 0.01;
     }
 
     update() {
@@ -89,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       this.swayAngle += this.swaySpeed;
-      this.x += this.vx + Math.sin(this.swayAngle) * 1.0;
+      this.x += this.vx + Math.sin(this.swayAngle) * 0.8;
       this.y += this.vy;
       this.angle += this.angularSpeed;
       this.flipAngle += this.flipSpeed;
@@ -115,18 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
       grad.addColorStop(1, `rgba(${this.palette.base}, ${alpha})`);
       ctx.fillStyle = grad;
 
-      // Slender rounded daisy petal shape
       ctx.beginPath();
-      ctx.ellipse(0, 0, this.size * 0.45, this.size, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, this.size * 0.5, this.size, 0, 0, Math.PI * 2);
       ctx.fill();
-
-      // Subtle warm yellow stamen dusting on some petals
-      if (this.palette.isDaisy) {
-        ctx.fillStyle = `rgba(251, 192, 45, ${alpha * 0.6})`;
-        ctx.beginPath();
-        ctx.arc(0, this.size * 0.65, this.size * 0.22, 0, Math.PI * 2);
-        ctx.fill();
-      }
 
       ctx.restore();
     }
@@ -142,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
       this.y = Math.random() * height;
       this.size = Math.random() * 2 + 0.8;
       this.baseAlpha = Math.random() * 0.5 + 0.25;
-      this.vy = -(Math.random() * 0.4 + 0.2);
-      this.vx = (Math.random() - 0.5) * 0.25;
+      this.vy = -(Math.random() * 0.35 + 0.15);
+      this.vx = (Math.random() - 0.5) * 0.2;
       this.pulse = Math.random() * Math.PI * 2;
       this.pulseSpeed = Math.random() * 0.04 + 0.02;
     }
@@ -162,9 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
     draw() {
       const alpha = (Math.sin(this.pulse) * 0.4 + 0.6) * this.baseAlpha;
       ctx.save();
-      ctx.fillStyle = `rgba(255, 245, 210, ${alpha})`;
-      ctx.shadowBlur = 6;
-      ctx.shadowColor = 'rgba(255, 210, 130, 0.7)';
+      ctx.fillStyle = `rgba(255, 235, 210, ${alpha})`;
+      ctx.shadowBlur = 5;
+      ctx.shadowColor = 'rgba(255, 182, 193, 0.7)';
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
@@ -173,9 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   for (let i = 0; i < PETAL_COUNT; i++) {
-    const p = new WildflowerPetal();
-    p.y = Math.random() * height;
-    petals.push(p);
+    petals.push(new FloatingPetal());
   }
 
   for (let i = 0; i < SPARKLE_COUNT; i++) {
@@ -212,85 +199,111 @@ document.addEventListener('DOMContentLoaded', () => {
      2. TOUCH & CLICK INTERACTION (PETAL BURST)
      ======================================================== */
   function triggerBurst(x, y) {
-    const burstCount = isMobile ? 14 : 20;
+    const burstCount = isMobile ? 16 : 24;
     for (let i = 0; i < burstCount; i++) {
-      bursts.push(new WildflowerPetal(true, x, y));
+      bursts.push(new FloatingPetal(true, x, y));
     }
     playGentleChime();
   }
 
   window.addEventListener('click', (e) => {
-    if (e.target.closest('.modal-container')) return;
+    if (e.target.closest('.modal-container') || e.target.closest('.envelope-interactive')) return;
     triggerBurst(e.clientX, e.clientY);
   });
 
   window.addEventListener('touchstart', (e) => {
     if (e.touches && e.touches[0]) {
-      if (e.target.closest('.modal-container')) return;
+      if (e.target.closest('.modal-container') || e.target.closest('.envelope-interactive')) return;
       const touch = e.touches[0];
       triggerBurst(touch.clientX, touch.clientY);
     }
   }, { passive: true });
 
   /* ========================================================
-     3. INVITATION MODAL (OPEN / CLOSE / TABS)
+     3. 3D BURGUNDY ENVELOPE OPENING ANIMATION
      ======================================================== */
-  const introCard = document.getElementById('mainIntroCard');
-  const openBtn = document.getElementById('openInvitationBtn');
+  const envelopeInteractive = document.getElementById('envelopeInteractive');
+  const invitationModal = document.getElementById('invitationModal');
   const closeBtn = document.getElementById('closeModalBtn');
   const modalBackdrop = document.getElementById('modalBackdrop');
-  const invitationModal = document.getElementById('invitationModal');
   const replayBtn = document.getElementById('replayBtn');
   const shareBtn = document.getElementById('shareBtn');
   const toastPopup = document.getElementById('toastPopup');
 
-  function openCard() {
-    const rect = (openBtn || introCard).getBoundingClientRect();
+  let isOpeningEnvelope = false;
+
+  function openEnvelope() {
+    if (isOpeningEnvelope) return;
+    isOpeningEnvelope = true;
+
+    // Burst particles at envelope center
+    const rect = envelopeInteractive.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
+    triggerBurst(cx, cy);
 
-    for (let i = 0; i < 30; i++) {
-      bursts.push(new WildflowerPetal(true, cx, cy));
-    }
-
-    invitationModal.classList.add('active');
-    invitationModal.setAttribute('aria-hidden', 'false');
+    // Trigger 3D flap opening and letter slide
+    envelopeInteractive.classList.add('opening');
     playArpeggio();
+
+    // After realistic envelope unfolding, display full invitation modal
+    setTimeout(() => {
+      invitationModal.classList.add('active');
+      invitationModal.setAttribute('aria-hidden', 'false');
+      isOpeningEnvelope = false;
+    }, 550);
   }
 
-  function closeCard() {
+  function closeInvitation() {
     invitationModal.classList.remove('active');
     invitationModal.setAttribute('aria-hidden', 'true');
+    // Reset envelope smoothly after modal closes
+    setTimeout(() => {
+      envelopeInteractive.classList.remove('opening');
+    }, 400);
   }
 
-  if (openBtn) {
-    openBtn.addEventListener('click', (e) => {
+  if (envelopeInteractive) {
+    envelopeInteractive.addEventListener('click', (e) => {
       e.stopPropagation();
-      openCard();
+      openEnvelope();
     });
-  }
 
-  if (introCard) {
-    introCard.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openCard();
+    envelopeInteractive.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openEnvelope();
+      }
     });
   }
 
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    closeCard();
+    closeInvitation();
   });
 
-  modalBackdrop.addEventListener('click', closeCard);
+  modalBackdrop.addEventListener('click', closeInvitation);
 
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && invitationModal.classList.contains('active')) {
-      closeCard();
+      closeInvitation();
     }
   });
 
-  // Tab switching (Thiệp Mời vs Sơ Đồ)
+  if (replayBtn) {
+    replayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeInvitation();
+      setTimeout(() => {
+        const rect = envelopeInteractive.getBoundingClientRect();
+        triggerBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }, 300);
+    });
+  }
+
+  /* ========================================================
+     4. TABS & TIME PILL SWITCHING
+     ======================================================== */
   const navTabs = document.querySelectorAll('.nav-tab');
   const tabPanes = document.querySelectorAll('.tab-pane');
 
@@ -308,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Time Pill Selection (9:30 vs 10:00 vs 10:30)
   const timePills = document.querySelectorAll('.time-pill');
   const invitePhoto = document.getElementById('invitePhoto');
   const downloadCardBtn = document.getElementById('downloadCardBtn');
@@ -334,7 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Share Link Button
   if (shareBtn) {
     shareBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -357,38 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       toastPopup.classList.remove('show');
     }, 2500);
-  }
-
-  /* ========================================================
-     4. REPLAY WILDFLOWER BLOOMING ANIMATION
-     ======================================================== */
-  function replayAnimation() {
-    closeCard();
-
-    const stems = document.querySelectorAll('.meadow-stem');
-    const leaves = document.querySelectorAll('.meadow-leaf');
-    const blooms = document.querySelectorAll('.wildflower-bloom');
-
-    [...stems, ...leaves, ...blooms].forEach((el) => {
-      el.style.animation = 'none';
-      el.offsetHeight; // force reflow
-      el.style.animation = '';
-    });
-
-    if (introCard) {
-      introCard.style.animation = 'none';
-      introCard.offsetHeight;
-      introCard.style.animation = '';
-    }
-
-    triggerBurst(width / 2, height / 2);
-  }
-
-  if (replayBtn) {
-    replayBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      replayAnimation();
-    });
   }
 
   /* ========================================================
