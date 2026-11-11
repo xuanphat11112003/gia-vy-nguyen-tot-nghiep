@@ -228,19 +228,21 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ========================================================
      3. INVITATION MODAL (OPEN / CLOSE / TABS)
      ======================================================== */
+  const introCard = document.getElementById('mainIntroCard');
   const openBtn = document.getElementById('openInvitationBtn');
-  const coverPreview = document.getElementById('coverPreview');
   const closeBtn = document.getElementById('closeModalBtn');
   const modalBackdrop = document.getElementById('modalBackdrop');
   const invitationModal = document.getElementById('invitationModal');
   const replayBtn = document.getElementById('replayBtn');
+  const shareBtn = document.getElementById('shareBtn');
+  const toastPopup = document.getElementById('toastPopup');
 
   function openCard() {
-    const rect = openBtn.getBoundingClientRect();
+    const rect = (openBtn || introCard).getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
 
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 30; i++) {
       bursts.push(new SakuraPetal(true, cx, cy));
     }
 
@@ -254,13 +256,15 @@ document.addEventListener('DOMContentLoaded', () => {
     invitationModal.setAttribute('aria-hidden', 'true');
   }
 
-  openBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    openCard();
-  });
+  if (openBtn) {
+    openBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openCard();
+    });
+  }
 
-  if (coverPreview) {
-    coverPreview.addEventListener('click', (e) => {
+  if (introCard) {
+    introCard.addEventListener('click', (e) => {
       e.stopPropagation();
       openCard();
     });
@@ -309,14 +313,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const imgSource = pill.getAttribute('data-img');
       if (invitePhoto && imgSource) {
-        invitePhoto.style.opacity = '0.4';
+        invitePhoto.style.opacity = '0.35';
         setTimeout(() => {
           invitePhoto.src = imgSource;
           invitePhoto.style.opacity = '1';
-        }, 150);
+        }, 140);
       }
     });
   });
+
+  // Share Link Button
+  if (shareBtn) {
+    shareBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          showToast('Đã sao chép link thiệp thành công! ✨');
+        }).catch(() => {
+          showToast('Đã sao chép link thiệp! ✨');
+        });
+      } else {
+        showToast('Đã sao chép link thiệp! ✨');
+      }
+    });
+  }
+
+  function showToast(msg) {
+    if (!toastPopup) return;
+    toastPopup.textContent = msg;
+    toastPopup.classList.add('show');
+    setTimeout(() => {
+      toastPopup.classList.remove('show');
+    }, 2500);
+  }
 
   /* ========================================================
      4. REPLAY BLOOMING ANIMATION
@@ -327,7 +356,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const stems = document.querySelectorAll('.branch-stem');
     const leaves = document.querySelectorAll('.leaf-sprout');
     const blooms = document.querySelectorAll('.bloom-container');
-    const introCard = document.getElementById('mainIntroCard');
 
     [...stems, ...leaves, ...blooms].forEach((el) => {
       el.style.animation = 'none';

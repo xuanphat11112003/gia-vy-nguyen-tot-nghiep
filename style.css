@@ -7,15 +7,11 @@
   --pink-sky-top: #fff3f7;
   --pink-sky-mid: #ffd6e4;
   --pink-sky-deep: #f894b7;
-  --pink-sky-base: #f06292;
   --rose-text: #4a1f2e;
   --rose-subtext: #7d4456;
   --rose-accent: #d81b60;
   --rose-pink: #ec407a;
   --gold-warm: #dca052;
-  --card-bg: rgba(255, 255, 255, 0.82);
-  --card-border: rgba(255, 255, 255, 0.95);
-  --glass-shadow: 0 16px 40px rgba(216, 27, 96, 0.18);
 }
 
 * {
@@ -145,29 +141,28 @@ html, body {
   filter: drop-shadow(0 8px 16px rgba(150, 40, 75, 0.22));
 }
 
-/* Placed organically around mobile screen borders */
 .branch-top-left {
   top: -10px;
   left: -15px;
-  width: 58vw;
-  max-width: 300px;
+  width: 55vw;
+  max-width: 290px;
 }
 
 .branch-bottom-left {
   bottom: -15px;
   left: -15px;
-  width: 62vw;
-  max-width: 330px;
+  width: 60vw;
+  max-width: 310px;
 }
 
 .branch-bottom-right {
   bottom: -15px;
   right: -15px;
-  width: 62vw;
-  max-width: 330px;
+  width: 60vw;
+  max-width: 310px;
 }
 
-/* Growing branch path animation */
+/* Branch Growth */
 .branch-stem {
   stroke-dasharray: 800;
   stroke-dashoffset: 800;
@@ -202,9 +197,7 @@ html, body {
   100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
-/* ==========================================
-   FLOWER BLOOMING EFFECT (KEY FIX)
-   ========================================== */
+/* Flower Blooming */
 .bloom-container {
   transform-box: fill-box;
   transform-origin: 0 0;
@@ -212,7 +205,6 @@ html, body {
   animation: blossomPop 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Staggered bloom delays */
 .bloom-d1 { animation-delay: 1.0s; }
 .bloom-d2 { animation-delay: 1.4s; }
 .bloom-d3 { animation-delay: 1.8s; }
@@ -235,20 +227,10 @@ html, body {
   }
 }
 
-/* Flower Scale Variants */
-.bloom-lg {
-  transform: scale(1.22);
-}
+.bloom-lg { transform: scale(1.22); }
+.bloom-md { transform: scale(1.0); }
+.bloom-sm { transform: scale(0.78); }
 
-.bloom-md {
-  transform: scale(1.0);
-}
-
-.bloom-sm {
-  transform: scale(0.78);
-}
-
-/* Petals breeze animation */
 .petals-group {
   animation: sakuraBreeze 4s ease-in-out infinite alternate;
   transform-origin: 0 0;
@@ -260,7 +242,6 @@ html, body {
   100% { transform: rotate(-2.5deg) scale(0.99); }
 }
 
-/* Center Pistil Glow */
 .pistil-group {
   animation: pistilGlow 3s ease-in-out infinite alternate;
 }
@@ -270,9 +251,9 @@ html, body {
   100% { filter: drop-shadow(0 0 4px #ff9800); }
 }
 
-/* ==========================================
-   4. CENTRAL INTRO SCREEN & CARD
-   ========================================== */
+/* ==========================================================================
+   4. CENTRAL INTRO SCREEN: 5.PNG AS CARD BACKGROUND
+   ========================================================================== */
 .intro-screen {
   position: relative;
   z-index: 10;
@@ -280,183 +261,97 @@ html, body {
   height: 100%;
   height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 16px;
 }
 
-.intro-card {
-  width: 100%;
-  max-width: 370px; /* Sized perfectly for mobile screens */
-  background: var(--card-bg);
-  border: 1.5px solid var(--card-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 28px;
-  box-shadow: var(--glass-shadow), 0 0 40px rgba(255, 175, 200, 0.4);
-  padding: 24px 20px 22px;
-  text-align: center;
+/* The Card itself uses 5.png as background */
+.intro-card-envelope {
+  position: relative;
+  width: min(84vw, 320px);
+  aspect-ratio: 1240 / 1748;
+  background-image: url('5.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 45px rgba(180, 40, 80, 0.28), 0 0 35px rgba(255, 180, 205, 0.45);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  padding: 16px 14px 18px;
+  cursor: pointer;
 
   /* Smooth entrance after flowers bloom */
   opacity: 0;
-  transform: translateY(20px) scale(0.95);
-  animation: cardFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards;
+  transform: translateY(24px) scale(0.94);
+  animation: cardCoverEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@keyframes cardFadeIn {
+@keyframes cardCoverEntrance {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
 
-/* Cover Image Preview (5.png) */
-.cover-preview-wrapper {
-  position: relative;
-  width: 110px;
-  height: 150px;
-  margin-bottom: 14px;
-  cursor: pointer;
-  perspective: 600px;
+.intro-card-envelope:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(180, 40, 80, 0.35), 0 0 45px rgba(255, 180, 205, 0.6);
 }
 
-.cover-glow {
-  position: absolute;
-  inset: -8px;
-  border-radius: 16px;
-  background: radial-gradient(circle, rgba(236, 64, 122, 0.35) 0%, transparent 70%);
-  animation: pulseCoverGlow 2.8s infinite;
+.intro-card-envelope:active {
+  transform: scale(0.98);
 }
 
-@keyframes pulseCoverGlow {
-  0% { transform: scale(0.9); opacity: 0.6; }
-  50% { transform: scale(1.2); opacity: 0.2; }
-  100% { transform: scale(0.9); opacity: 0.6; }
-}
-
-.cover-image {
-  position: relative;
+/* Top Tag over the striped background */
+.card-cover-top {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 2px solid #ffffff;
-  box-shadow: 0 8px 20px rgba(180, 40, 80, 0.25);
-  animation: floatCover 5s ease-in-out infinite alternate;
-  transition: transform 0.3s ease;
-}
-
-.cover-preview-wrapper:hover .cover-image {
-  transform: scale(1.05) rotate(-2deg);
-}
-
-@keyframes floatCover {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-6px) rotate(1.5deg); }
-}
-
-.stamp-badge {
-  position: absolute;
-  bottom: -8px;
-  right: -8px;
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, #ffd79e, #e6a15c);
-  border-radius: 50%;
-  border: 2px solid #ffffff;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  z-index: 2;
+  padding-top: 4px;
 }
 
-/* Typography */
-.card-headings {
-  width: 100%;
-}
-
-.sub-greeting {
-  display: inline-block;
+.cover-tag {
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 2.5px;
-  color: var(--rose-accent);
-  margin-bottom: 4px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  background: rgba(180, 40, 80, 0.82);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 4px 14px;
+  border-radius: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
-.main-title {
+/* Center space lets 5.png's "THIỆP MỜI" show clearly */
+.card-cover-center {
+  width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  line-height: 1.05;
-  margin-bottom: 6px;
-}
-
-.script-text {
-  font-family: 'Alex Brush', cursive;
-  font-size: 2.5rem;
-  color: var(--rose-text);
-  text-shadow: 0 2px 6px rgba(255, 180, 200, 0.4);
-}
-
-.serif-text {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.95rem;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  background: linear-gradient(135deg, #9c274d 0%, #d81b60 50%, #ad1457 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.flower-divider {
-  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin: 4px 0 8px;
+  padding-top: 70px; /* Positions Vy's name gracefully inside the pink badge below "MỜI" */
 }
 
-.divider-line {
-  height: 1px;
-  width: 35px;
-  background: linear-gradient(to right, transparent, rgba(200, 80, 115, 0.35), transparent);
+.cover-recipient-name {
+  font-family: 'Alex Brush', cursive;
+  font-size: 2.4rem;
+  color: #882244;
+  text-shadow: 0 2px 6px rgba(255, 255, 255, 0.9), 0 1px 2px rgba(136, 34, 68, 0.2);
+  line-height: 1.1;
+  letter-spacing: 0.5px;
 }
 
-.divider-icon {
-  font-size: 0.95rem;
-  animation: rotatePetal 15s linear infinite;
-}
-
-@keyframes rotatePetal {
-  100% { transform: rotate(360deg); }
-}
-
-.recipient-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.55rem;
-  font-weight: 600;
-  font-style: italic;
-  color: var(--rose-text);
-  margin-bottom: 8px;
-}
-
-.emotional-quote {
-  font-size: 0.85rem;
-  line-height: 1.55;
-  color: var(--rose-subtext);
-  font-weight: 400;
-  margin: 0 auto 18px;
-  max-width: 310px;
-}
-
-/* Call to Action Button */
-.action-container {
+/* Bottom Action Button */
+.card-cover-bottom {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -469,24 +364,24 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 100%;
-  max-width: 260px;
-  height: 50px;
-  padding: 0 20px;
-  font-size: 1rem;
+  width: 88%;
+  max-width: 240px;
+  height: 46px;
+  padding: 0 18px;
+  font-size: 0.98rem;
   font-weight: 600;
   font-family: inherit;
   color: #ffffff;
   background: linear-gradient(135deg, #f75d88 0%, #ea3b6f 50%, #cf2359 100%);
-  border: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(234, 59, 111, 0.38), 0 0 15px rgba(255, 175, 200, 0.5);
+  box-shadow: 0 8px 22px rgba(234, 59, 111, 0.42), 0 0 15px rgba(255, 175, 200, 0.5);
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .open-invitation-btn:active {
-  transform: translateY(1px) scale(0.98);
+  transform: translateY(1px) scale(0.97);
 }
 
 .btn-light-sweep {
@@ -510,16 +405,41 @@ html, body {
   font-size: 0.95rem;
 }
 
+/* Corner graduation cap seal badge */
+.stamp-seal {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #ffe0b2, #f5a623);
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  animation: floatSeal 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatSeal {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-3px) rotate(6deg); }
+}
+
+/* Touch Hint */
 .touch-hint {
   font-size: 0.74rem;
   color: rgba(125, 68, 86, 0.75);
   margin-top: 14px;
   font-style: italic;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-/* ==========================================
+/* ==========================================================================
    5. INVITATION MODAL (FULLSCREEN PHONE CARDS)
-   ========================================== */
+   ========================================================================== */
 .modal-invitation {
   position: fixed;
   inset: 0;
@@ -689,6 +609,41 @@ html, body {
   display: block;
 }
 
+/* Event Utilities */
+.event-utilities {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.util-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calendar-btn {
+  background: #fff0f5;
+  color: var(--rose-accent);
+  border: 1px solid #f8bbd0;
+}
+
+.share-btn {
+  background: #ffffff;
+  color: var(--rose-subtext);
+  border: 1px solid #e0e0e0;
+}
+
 /* Contact Actions on Tab 2 */
 .quick-contact-actions {
   width: 100%;
@@ -754,7 +709,7 @@ html, body {
 }
 
 /* ==========================================
-   6. FLOATING AUDIO TOGGLE
+   6. FLOATING AUDIO TOGGLE & TOAST
    ========================================== */
 .audio-toggle-btn {
   position: fixed;
@@ -791,33 +746,55 @@ html, body {
   100% { box-shadow: 0 0 0 0 rgba(236, 64, 122, 0); }
 }
 
+.toast-popup {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: rgba(50, 18, 28, 0.9);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 200;
+  white-space: nowrap;
+}
+
+.toast-popup.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* ==========================================
    7. TABLET & DESKTOP ADJUSTMENTS
    ========================================== */
 @media (min-width: 768px) {
-  .intro-card {
-    max-width: 410px;
-    padding: 28px 24px 24px;
-    border-radius: 34px;
+  .intro-card-envelope {
+    width: 320px;
   }
 
   .branch-top-left {
+    width: 28vw;
+    max-width: 360px;
+  }
+
+  .branch-bottom-left {
     width: 30vw;
     max-width: 380px;
   }
 
-  .branch-bottom-left {
-    width: 32vw;
-    max-width: 400px;
-  }
-
   .branch-bottom-right {
-    width: 32vw;
-    max-width: 400px;
+    width: 30vw;
+    max-width: 380px;
   }
 
   .modal-container {
-    max-width: 450px;
+    max-width: 440px;
     max-height: 88dvh;
   }
 }
