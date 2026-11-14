@@ -371,6 +371,120 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ========================================================
+     5. GUEST PERSONALIZATION & SMART SCHEDULE
+     ======================================================== */
+  const GUEST_SCHEDULE = [
+    // 09:30 (10 guests)
+    { name: 'Thành', time: '09:30', img: '1.png' },
+    { name: 'Trân', time: '09:30', img: '1.png' },
+    { name: 'Phương', time: '09:30', img: '1.png' },
+    { name: 'An', time: '09:30', img: '1.png' },
+    { name: 'Phát', time: '09:30', img: '1.png' },
+    { name: 'Tuấn Anh', time: '09:30', img: '1.png' },
+    { name: 'Hương', time: '09:30', img: '1.png' },
+    { name: 'Huyền', time: '09:30', img: '1.png' },
+    { name: 'Tuân', time: '09:30', img: '1.png' },
+    { name: 'Yến Vy', time: '09:30', img: '1.png' },
+    // 10:00 (3 guests)
+    { name: 'Chương', time: '10:00', img: '2.png' },
+    { name: 'Nhàn', time: '10:00', img: '2.png' },
+    { name: 'Gia Tuệ', time: '10:00', img: '2.png' },
+    // 10:30 (13 guests)
+    { name: 'Anh Đức', time: '10:30', img: '3.png' },
+    { name: 'Chế Hân', time: '10:30', img: '3.png' },
+    { name: 'Việt Hoàng', time: '10:30', img: '3.png' },
+    { name: 'Gia Linh', time: '10:30', img: '3.png' },
+    { name: 'Đại', time: '10:30', img: '3.png' },
+    { name: 'Phát', time: '10:30', img: '3.png' },
+    { name: 'Xune', time: '10:30', img: '3.png' },
+    { name: 'Hoàng', time: '10:30', img: '3.png' },
+    { name: 'Mẩn', time: '10:30', img: '3.png' },
+    { name: 'Tiktok', time: '10:30', img: '3.png' },
+    { name: 'Anh Phong', time: '10:30', img: '3.png' },
+    { name: 'Hữu Đức', time: '10:30', img: '3.png' },
+    { name: 'Minh Đức', time: '10:30', img: '3.png' }
+  ];
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function applyGuestPersonalization() {
+    const params = new URLSearchParams(window.location.search);
+    const guestParam = params.get('to') || params.get('guest') || params.get('name');
+    let timeParam = params.get('time');
+
+    if (guestParam) {
+      const guestName = guestParam.trim();
+
+      // Auto-detect time from schedule if not explicitly set
+      if (!timeParam) {
+        const match = GUEST_SCHEDULE.find((g) => g.name.toLowerCase() === guestName.toLowerCase());
+        if (match) {
+          timeParam = match.time;
+        }
+      }
+
+      // 1. Personalized envelope handwritten prompt
+      const envelopePrompt = document.getElementById('envelopePrompt');
+      if (envelopePrompt) {
+        envelopePrompt.innerHTML = `Thương gửi <span class="guest-name-accent">${escapeHtml(guestName)}</span> 💌<span class="prompt-hint-small">Chạm vào phong bì mở thiệp nhaaa ✨</span>`;
+      }
+
+      // 2. Nametag on envelope
+      const envelopeNametag = document.getElementById('envelopeNametag');
+      if (envelopeNametag) {
+        envelopeNametag.style.display = 'inline-flex';
+        envelopeNametag.textContent = `To: ${guestName} ✨`;
+      }
+
+      // 3. Modal personalized greeting badge
+      const modalGuestBadge = document.getElementById('modalGuestBadge');
+      if (modalGuestBadge) {
+        modalGuestBadge.style.display = 'block';
+        modalGuestBadge.innerHTML = `Thương mời <strong>${escapeHtml(guestName)}</strong> chung vui lễ tốt nghiệp cùng Vy 🎓`;
+      }
+    }
+
+    // Auto-select time slot & image
+    if (timeParam) {
+      const cleanTime = timeParam.replace('h', ':').trim();
+      let targetImg = '1.png';
+      if (cleanTime.includes('10:00')) targetImg = '2.png';
+      else if (cleanTime.includes('10:30')) targetImg = '3.png';
+
+      timePills.forEach((pill) => {
+        const text = pill.textContent.trim();
+        const isMatch =
+          cleanTime === '09:30' || cleanTime === '9:30'
+            ? text.includes('09:30')
+            : text.includes(cleanTime);
+        if (isMatch) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+
+      if (invitePhoto) {
+        invitePhoto.src = targetImg;
+      }
+    }
+
+    // If guest or specific time slot is assigned, hide the 3 time buttons
+    const timeSelector = document.querySelector('.time-selector');
+    if (guestParam || timeParam) {
+      if (timeSelector) {
+        timeSelector.style.display = 'none';
+      }
+    }
+  }
+
+  applyGuestPersonalization();
+
+  /* ========================================================
      5. WEB AUDIO API - ETHEREAL MUSIC BOX
      ======================================================== */
   let audioCtx = null;

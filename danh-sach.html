@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Danh Sách Khách Mời & Link Thiệp - Nguyễn Gia Vy 🎓</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-cream: #fff7f9;
+      --card-bg: #ffffff;
+      --pink-primary: #e91e63;
+      --pink-dark: #c2185b;
+      --pink-soft: #fce4ec;
+      --pink-border: #f8bbd0;
+      --text-main: #331f28;
+      --text-muted: #8d6273;
+      --wine: #9e2843;
+      --wine-light: #ad304d;
+      --gold: #d4af37;
+      --success: #2e7d32;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-cream);
+      color: var(--text-main);
+      padding: 20px 14px 60px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding: 24px 16px;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 8px 24px rgba(180, 50, 80, 0.08);
+      border: 1.5px solid #ffe0ec;
+      position: relative;
+    }
+
+    .top-badge {
+      display: inline-block;
+      background: var(--pink-soft);
+      color: var(--pink-dark);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      border: 1px solid var(--pink-border);
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--wine);
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--pink-soft);
+      color: var(--pink-dark);
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.86rem;
+      transition: all 0.2s ease;
+      border: 1px solid var(--pink-border);
+    }
+
+    .btn-back-home:hover {
+      background: var(--pink-primary);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Stats Row */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1.5px solid #ffe3ec;
+      box-shadow: 0 4px 14px rgba(180, 50, 80, 0.05);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-card:hover, .stat-card.active {
+      border-color: var(--pink-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(233, 30, 99, 0.15);
+    }
+
+    .stat-info h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--wine);
+    }
+
+    .stat-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .stat-num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--pink-primary);
+      background: var(--pink-soft);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Base URL Config Box */
+    .config-box {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      border: 1.5px solid #ffe3ec;
+      box-shadow: 0 4px 14px rgba(180, 50, 80, 0.05);
+    }
+
+    .config-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--wine);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .config-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .base-url-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1.5px solid #e0c8d1;
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .base-url-input:focus {
+      border-color: var(--pink-primary);
+    }
+
+    .btn-config-save {
+      padding: 10px 18px;
+      background: var(--pink-soft);
+      color: var(--pink-dark);
+      border: 1px solid var(--pink-border);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.86rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-config-save:hover {
+      background: var(--pink-primary);
+      color: #ffffff;
+    }
+
+    .config-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Filter & Search Toolbar */
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-wrap {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 40px;
+      border-radius: 25px;
+      border: 1.5px solid #ffd4e2;
+      background: #ffffff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      outline: none;
+      box-shadow: 0 4px 12px rgba(180, 50, 80, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--pink-primary);
+      box-shadow: 0 4px 14px rgba(233, 30, 99, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      opacity: 0.6;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--pink-border);
+      background: #ffffff;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--pink-primary);
+      color: #ffffff;
+      border-color: var(--pink-primary);
+      box-shadow: 0 4px 10px rgba(233, 30, 99, 0.25);
+    }
+
+    .btn-export-all {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px dashed var(--pink-dark);
+      background: var(--pink-soft);
+      color: var(--pink-dark);
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-export-all:hover {
+      background: var(--pink-dark);
+      color: #ffffff;
+    }
+
+    /* Guest List Container */
+    .guest-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .guest-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .guest-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 16px;
+      border: 1.5px solid #ffe3ec;
+      box-shadow: 0 4px 14px rgba(180, 50, 80, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .guest-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(180, 50, 80, 0.12);
+      border-color: #f8bbd0;
+    }
+
+    .guest-card.sent {
+      background: #fdfafb;
+      border-color: #e8d0d8;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 8px rgba(233, 30, 99, 0.2);
+    }
+
+    .slot-0930 .avatar-circle {
+      background: linear-gradient(135deg, #f8bbd0 0%, #ec407a 100%);
+    }
+
+    .slot-1000 .avatar-circle {
+      background: linear-gradient(135deg, #ce93d8 0%, #ab47bc 100%);
+    }
+
+    .slot-1030 .avatar-circle {
+      background: linear-gradient(135deg, #90caf9 0%, #42a5f5 100%);
+    }
+
+    .name-block h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--wine);
+      line-height: 1.2;
+    }
+
+    .time-badge {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin-top: 4px;
+    }
+
+    .slot-0930 .time-badge {
+      background: #fce4ec;
+      color: #c2185b;
+    }
+
+    .slot-1000 .time-badge {
+      background: #f3e5f5;
+      color: #7b1fa2;
+    }
+
+    .slot-1030 .time-badge {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    /* Status checkbox */
+    .status-check {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .status-check input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--pink-primary);
+      cursor: pointer;
+    }
+
+    .status-check.is-sent {
+      color: var(--success);
+    }
+
+    /* Action Buttons Row */
+    .card-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      flex: 1;
+      min-width: 100px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-copy-link {
+      background: #fff0f5;
+      color: var(--pink-dark);
+      border-color: var(--pink-border);
+    }
+
+    .btn-copy-link:hover {
+      background: var(--pink-primary);
+      color: #ffffff;
+      border-color: var(--pink-primary);
+    }
+
+    .btn-copy-msg {
+      background: #fff8e1;
+      color: #8d6e63;
+      border-color: #ffe082;
+    }
+
+    .btn-copy-msg:hover {
+      background: #ffa000;
+      color: #ffffff;
+      border-color: #ffa000;
+    }
+
+    .btn-preview {
+      background: #f5f5f5;
+      color: #616161;
+      border-color: #e0e0e0;
+    }
+
+    .btn-preview:hover {
+      background: #424242;
+      color: #ffffff;
+    }
+
+    /* Toast Notification */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(35, 15, 22, 0.94);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
+      backdrop-filter: blur(8px);
+      text-align: center;
+    }
+
+    .toast-box.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Top Header -->
+    <header class="header">
+      <span class="top-badge">Quản Lý Thiệp Tốt Nghiệp 🎓</span>
+      <h1>Danh Sách Khách Mời & Link Riêng</h1>
+      <p class="subtitle">Thương mời dự lễ trao bằng tốt nghiệp • Nguyễn Gia Vy (Khóa 17 Marketing)</p>
+      <a href="index.html" class="btn-back-home">💌 Mở Thiệp Mời Chính</a>
+    </header>
+
+    <!-- Stats summary grid -->
+    <section class="stats-grid">
+      <div class="stat-card active" data-filter="all">
+        <div class="stat-info">
+          <h3>Tất Cả Khách</h3>
+          <p>3 khung giờ</p>
+        </div>
+        <div class="stat-num" id="totalCount">26</div>
+      </div>
+
+      <div class="stat-card" data-filter="09:30">
+        <div class="stat-info">
+          <h3>Ca 09:30</h3>
+          <p>22/11/2026</p>
+        </div>
+        <div class="stat-num" id="count0930">10</div>
+      </div>
+
+      <div class="stat-card" data-filter="10:00">
+        <div class="stat-info">
+          <h3>Ca 10:00</h3>
+          <p>22/11/2026</p>
+        </div>
+        <div class="stat-num" id="count1000">3</div>
+      </div>
+
+      <div class="stat-card" data-filter="10:30">
+        <div class="stat-info">
+          <h3>Ca 10:30</h3>
+          <p>22/11/2026</p>
+        </div>
+        <div class="stat-num" id="count1030">13</div>
+      </div>
+    </section>
+
+    <!-- Base URL Config Box -->
+    <div class="config-box">
+      <div class="config-title">🌐 Đường dẫn gốc website (Base URL)</div>
+      <div class="config-row">
+        <input type="text" id="baseUrlInput" class="base-url-input" placeholder="Ví dụ: https://thieptotnghiep-giavy.vercel.app/index.html">
+        <button class="btn-config-save" id="btnSaveBaseUrl">💾 Lưu đường dẫn</button>
+      </div>
+      <p class="config-hint">💡 Link cá nhân hóa sẽ dùng đường dẫn này. Khi bạn deploy web lên mạng (Vercel, GitHub Pages, Netlify...), hãy dán link web chính vào đây nhé!</p>
+    </div>
+
+    <!-- Search & Filters Toolbar -->
+    <div class="toolbar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Tìm tên khách mời (VD: Thành, Đức, Vy...)...">
+      </div>
+
+      <div class="filter-pills">
+        <button class="filter-btn active" data-filter="all">Tất cả (26)</button>
+        <button class="filter-btn" data-filter="09:30">09:30 (10)</button>
+        <button class="filter-btn" data-filter="10:00">10:00 (3)</button>
+        <button class="filter-btn" data-filter="10:30">10:30 (13)</button>
+        <button class="filter-btn" data-filter="unsent">Chưa gửi</button>
+        <button class="filter-btn" data-filter="sent">Đã gửi</button>
+        <button class="btn-export-all" id="btnExportAll">📋 Sao chép toàn bộ danh sách</button>
+      </div>
+    </div>
+
+    <!-- Guest Cards Grid -->
+    <div class="guest-list" id="guestListContainer">
+      <!-- Injected by JavaScript -->
+    </div>
+
+  </div>
+
+  <!-- Toast Notification Popup -->
+  <div class="toast-box" id="toastBox">Đã sao chép link! ✨</div>
+
+  <script>
+    // 26 guests organized by time slots
+    const GUESTS = [
+      // 09:30 (10 bạn)
+      { id: 1, name: 'Thành', time: '09:30', slotClass: 'slot-0930' },
+      { id: 2, name: 'Trân', time: '09:30', slotClass: 'slot-0930' },
+      { id: 3, name: 'Phương', time: '09:30', slotClass: 'slot-0930' },
+      { id: 4, name: 'An', time: '09:30', slotClass: 'slot-0930' },
+      { id: 5, name: 'Phát', time: '09:30', slotClass: 'slot-0930' },
+      { id: 6, name: 'Tuấn Anh', time: '09:30', slotClass: 'slot-0930' },
+      { id: 7, name: 'Hương', time: '09:30', slotClass: 'slot-0930' },
+      { id: 8, name: 'Huyền', time: '09:30', slotClass: 'slot-0930' },
+      { id: 9, name: 'Tuân', time: '09:30', slotClass: 'slot-0930' },
+      { id: 10, name: 'Yến Vy', time: '09:30', slotClass: 'slot-0930' },
+
+      // 10:00 (3 bạn)
+      { id: 11, name: 'Chương', time: '10:00', slotClass: 'slot-1000' },
+      { id: 12, name: 'Nhàn', time: '10:00', slotClass: 'slot-1000' },
+      { id: 13, name: 'Gia Tuệ', time: '10:00', slotClass: 'slot-1000' },
+
+      // 10:30 (13 bạn)
+      { id: 14, name: 'Anh Đức', time: '10:30', slotClass: 'slot-1030' },
+      { id: 15, name: 'Chế Hân', time: '10:30', slotClass: 'slot-1030' },
+      { id: 16, name: 'Việt Hoàng', time: '10:30', slotClass: 'slot-1030' },
+      { id: 17, name: 'Gia Linh', time: '10:30', slotClass: 'slot-1030' },
+      { id: 18, name: 'Đại', time: '10:30', slotClass: 'slot-1030' },
+      { id: 19, name: 'Phát', time: '10:30', slotClass: 'slot-1030' },
+      { id: 20, name: 'Xune', time: '10:30', slotClass: 'slot-1030' },
+      { id: 21, name: 'Hoàng', time: '10:30', slotClass: 'slot-1030' },
+      { id: 22, name: 'Mẩn', time: '10:30', slotClass: 'slot-1030' },
+      { id: 23, name: 'Tiktok', time: '10:30', slotClass: 'slot-1030' },
+      { id: 24, name: 'Anh Phong', time: '10:30', slotClass: 'slot-1030' },
+      { id: 25, name: 'Hữu Đức', time: '10:30', slotClass: 'slot-1030' },
+      { id: 26, name: 'Minh Đức', time: '10:30', slotClass: 'slot-1030' }
+    ];
+
+    // LocalStorage keys
+    const LS_BASE_URL = 'giavy_guest_base_url';
+    const LS_SENT_STATUS = 'giavy_guest_sent_status';
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    // Load or calculate Base URL
+    function getBaseUrl() {
+      const saved = localStorage.getItem(LS_BASE_URL);
+      if (saved && saved.trim()) return saved.trim();
+
+      // Detect current origin & folder
+      const loc = window.location;
+      const pathParts = loc.pathname.split('/');
+      pathParts[pathParts.length - 1] = 'index.html';
+      return loc.origin + pathParts.join('/');
+    }
+
+    function getSentStatus() {
+      try {
+        return JSON.parse(localStorage.getItem(LS_SENT_STATUS)) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function setGuestSent(id, isSent) {
+      const status = getSentStatus();
+      status[id] = isSent;
+      localStorage.setItem(LS_SENT_STATUS, JSON.stringify(status));
+    }
+
+    function generateGuestLink(guest) {
+      const base = getBaseUrl();
+      const sep = base.includes('?') ? '&' : '?';
+      return `${base}${sep}to=${encodeURIComponent(guest.name)}&time=${encodeURIComponent(guest.time)}`;
+    }
+
+    function generateGuestMessage(guest) {
+      const link = generateGuestLink(guest);
+      return `Thương mời ${guest.name} đến chung vui lễ tốt nghiệp cùng Gia Vy nha! 🎓✨\n\n⏰ Khung giờ dự lễ: ${guest.time} ngày 22/11/2026\n📍 Địa điểm: Trường ĐH Công Nghiệp TP.HCM (12 Nguyễn Văn Bảo, Gò Vấp)\n\nVy có gửi thiệp mời riêng cho ${guest.name} ở đây nè:\n👉 ${link}\n\nThương mời ${guest.name} ghé chụp ảnh kỷ niệm cùng Vy nhóoo! 💌🌸`;
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById('toastBox');
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2400);
+    }
+
+    function renderGuests() {
+      const container = document.getElementById('guestListContainer');
+      const sentStatus = getSentStatus();
+      
+      const filtered = GUESTS.filter(guest => {
+        // Time / Sent filter
+        if (currentFilter === '09:30' && guest.time !== '09:30') return false;
+        if (currentFilter === '10:00' && guest.time !== '10:00') return false;
+        if (currentFilter === '10:30' && guest.time !== '10:30') return false;
+        if (currentFilter === 'sent' && !sentStatus[guest.id]) return false;
+        if (currentFilter === 'unsent' && sentStatus[guest.id]) return false;
+
+        // Search query
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchName = guest.name.toLowerCase().includes(q);
+          const matchTime = guest.time.includes(q);
+          if (!matchName && !matchTime) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="empty-state">🌸 Không tìm thấy khách mời nào phù hợp với bộ lọc.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(guest => {
+        const isSent = !!sentStatus[guest.id];
+        const link = generateGuestLink(guest);
+        const initial = guest.name.trim().charAt(0).toUpperCase();
+
+        return `
+          <div class="guest-card ${guest.slotClass} ${isSent ? 'sent' : ''}" data-id="${guest.id}">
+            <div class="card-top">
+              <div class="user-info">
+                <div class="avatar-circle">${initial}</div>
+                <div class="name-block">
+                  <h4>${guest.name}</h4>
+                  <span class="time-badge">⏰ ${guest.time} • 22/11</span>
+                </div>
+              </div>
+
+              <label class="status-check ${isSent ? 'is-sent' : ''}">
+                <input type="checkbox" ${isSent ? 'checked' : ''} onchange="toggleSent(${guest.id}, this.checked)">
+                <span>${isSent ? 'Đã gửi ✓' : 'Chưa gửi'}</span>
+              </label>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn-action btn-copy-link" onclick="copyGuestLink(${guest.id})">
+                <span>🔗 Sao chép link</span>
+              </button>
+              <button class="btn-action btn-copy-msg" onclick="copyGuestMsg(${guest.id})">
+                <span>💬 Sao chép tin nhắn</span>
+              </button>
+              <a href="${link}" target="_blank" rel="noopener noreferrer" class="btn-action btn-preview">
+                <span>👁️ Xem thiệp</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.toggleSent = function(id, isChecked) {
+      setGuestSent(id, isChecked);
+      renderGuests();
+      const guest = GUESTS.find(g => g.id === id);
+      showToast(isChecked ? `Đã đánh dấu đã gửi thiệp cho ${guest.name} ✓` : `Đã bỏ đánh dấu ${guest.name}`);
+    };
+
+    window.copyGuestLink = function(id) {
+      const guest = GUESTS.find(g => g.id === id);
+      const link = generateGuestLink(guest);
+      navigator.clipboard.writeText(link).then(() => {
+        showToast(`Đã sao chép link thiệp cho ${guest.name}! ✨`);
+      }).catch(() => {
+        showToast(`Đã sao chép link thiệp! ✨`);
+      });
+    };
+
+    window.copyGuestMsg = function(id) {
+      const guest = GUESTS.find(g => g.id === id);
+      const msg = generateGuestMessage(guest);
+      navigator.clipboard.writeText(msg).then(() => {
+        showToast(`Đã sao chép tin nhắn mời cho ${guest.name}! 💌`);
+      }).catch(() => {
+        showToast(`Đã sao chép tin nhắn! 💌`);
+      });
+    };
+
+    // Filter clicks
+    document.querySelectorAll('[data-filter]').forEach(el => {
+      el.addEventListener('click', () => {
+        const filterVal = el.getAttribute('data-filter');
+        currentFilter = filterVal;
+
+        document.querySelectorAll('.stat-card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+
+        const matchStat = document.querySelector(`.stat-card[data-filter="${filterVal}"]`);
+        if (matchStat) matchStat.classList.add('active');
+
+        const matchBtn = document.querySelector(`.filter-btn[data-filter="${filterVal}"]`);
+        if (matchBtn) matchBtn.classList.add('active');
+
+        renderGuests();
+      });
+    });
+
+    // Search input
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      renderGuests();
+    });
+
+    // Base URL save
+    const baseUrlInput = document.getElementById('baseUrlInput');
+    baseUrlInput.value = getBaseUrl();
+
+    document.getElementById('btnSaveBaseUrl').addEventListener('click', () => {
+      const val = baseUrlInput.value.trim();
+      if (val) {
+        localStorage.setItem(LS_BASE_URL, val);
+        showToast('Đã lưu đường dẫn website gốc thành công! ✨');
+        renderGuests();
+      }
+    });
+
+    // Export all list
+    document.getElementById('btnExportAll').addEventListener('click', () => {
+      let exportText = "DANH SÁCH KHÁCH MỜI DỰ LỄ TỐT NGHIỆP - NGUYỄN GIA VY\n";
+      exportText += "Thời gian: Ngày 22/11/2026 | Địa điểm: ĐH Công nghiệp TP.HCM\n\n";
+
+      ['09:30', '10:00', '10:30'].forEach(slot => {
+        exportText += `==================== KHUNG GIỜ ${slot} ====================\n`;
+        const slotGuests = GUESTS.filter(g => g.time === slot);
+        slotGuests.forEach((g, idx) => {
+          exportText += `${idx + 1}. ${g.name} - Link: ${generateGuestLink(g)}\n`;
+        });
+        exportText += "\n";
+      });
+
+      navigator.clipboard.writeText(exportText).then(() => {
+        showToast('Đã sao chép toàn bộ danh sách và link thiệp! 📋✨');
+      }).catch(() => {
+        showToast('Đã sao chép danh sách! 📋');
+      });
+    });
+
+    // Initial render
+    renderGuests();
+  </script>
+</body>
+</html>

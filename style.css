@@ -22,7 +22,8 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   height: 100dvh;
@@ -87,26 +88,75 @@ html, body {
 }
 
 @keyframes flagSway {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(2.5deg); }
-  100% { transform: rotate(-2.5deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(2.5deg);
+  }
+
+  100% {
+    transform: rotate(-2.5deg);
+  }
 }
 
 /* Alternating cute pastel pink to rose shades */
-.flag-1  { background: #f8bbd0; }
-.flag-2  { background: #f06292; }
-.flag-3  { background: #ff80ab; }
-.flag-4  { background: #e91e63; }
-.flag-5  { background: #f48fb1; }
-.flag-6  { background: #c2185b; }
-.flag-7  { background: #ff4081; }
-.flag-8  { background: #f8bbd0; }
-.flag-9  { background: #f06292; }
-.flag-10 { background: #ff80ab; }
-.flag-11 { background: #e91e63; }
-.flag-12 { background: #f48fb1; }
-.flag-13 { background: #c2185b; }
-.flag-14 { background: #ff4081; }
+.flag-1 {
+  background: #f8bbd0;
+}
+
+.flag-2 {
+  background: #f06292;
+}
+
+.flag-3 {
+  background: #ff80ab;
+}
+
+.flag-4 {
+  background: #e91e63;
+}
+
+.flag-5 {
+  background: #f48fb1;
+}
+
+.flag-6 {
+  background: #c2185b;
+}
+
+.flag-7 {
+  background: #ff4081;
+}
+
+.flag-8 {
+  background: #f8bbd0;
+}
+
+.flag-9 {
+  background: #f06292;
+}
+
+.flag-10 {
+  background: #ff80ab;
+}
+
+.flag-11 {
+  background: #e91e63;
+}
+
+.flag-12 {
+  background: #f48fb1;
+}
+
+.flag-13 {
+  background: #c2185b;
+}
+
+.flag-14 {
+  background: #ff4081;
+}
 
 /* ==========================================
    3. AESTHETIC STICKERS COLLAGE LAYER
@@ -170,14 +220,43 @@ html, body {
   animation: sparkleTwinkle 2.5s ease-in-out infinite alternate;
 }
 
-.sp-1 { top: 18%; left: 34%; animation-delay: 0.2s; }
-.sp-2 { top: 32%; left: 12%; animation-delay: 0.8s; font-size: 1.4rem; }
-.sp-3 { top: 29%; right: 18%; animation-delay: 1.2s; font-size: 0.85rem; }
-.sp-4 { bottom: 29%; left: 28%; animation-delay: 0.5s; }
+.sp-1 {
+  top: 18%;
+  left: 34%;
+  animation-delay: 0.2s;
+}
+
+.sp-2 {
+  top: 32%;
+  left: 12%;
+  animation-delay: 0.8s;
+  font-size: 1.4rem;
+}
+
+.sp-3 {
+  top: 29%;
+  right: 18%;
+  animation-delay: 1.2s;
+  font-size: 0.85rem;
+}
+
+.sp-4 {
+  bottom: 29%;
+  left: 28%;
+  animation-delay: 0.5s;
+}
 
 @keyframes sparkleTwinkle {
-  0% { transform: scale(0.8); opacity: 0.4; }
-  100% { transform: scale(1.25); opacity: 0.95; filter: drop-shadow(0 0 3px #f48fb1); }
+  0% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(1.25);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 3px #f48fb1);
+  }
 }
 
 /* "ALL YOU NEED IS LOVE" Vintage Badge (Bottom-Right) */
@@ -216,18 +295,33 @@ html, body {
 }
 
 @keyframes stickerFloat1 {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-5px) rotate(2deg); }
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-5px) rotate(2deg);
+  }
 }
 
 @keyframes stickerFloat2 {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(4px) rotate(-2deg); }
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(4px) rotate(-2deg);
+  }
 }
 
 @keyframes stickerRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ==========================================================================
@@ -248,8 +342,8 @@ html, body {
 
 /* Playful Handwritten Prompt */
 .envelope-handwritten-prompt {
-  font-family: 'Caveat', cursive, sans-serif;
-  font-size: 1.85rem;
+  font-family: 'Patrick Hand', 'Mali', 'Itim', cursive, sans-serif;
+  font-size: 1.95rem;
   font-weight: 700;
   color: var(--prompt-blue);
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
@@ -259,16 +353,35 @@ html, body {
   animation: promptWiggle 3.5s ease-in-out infinite alternate;
 }
 
+.guest-name-accent {
+  color: #c2185b;
+  text-decoration: underline wavy #ff80ab;
+}
+
+.prompt-hint-small {
+  display: block;
+  font-size: 1.12rem;
+  font-weight: 500;
+  color: #457b9d;
+  margin-top: 4px;
+}
+
 @keyframes promptWiggle {
-  0% { transform: translateY(0) rotate(-0.5deg); }
-  100% { transform: translateY(-3px) rotate(0.8deg); }
+  0% {
+    transform: translateY(0) rotate(-0.5deg);
+  }
+
+  100% {
+    transform: translateY(-3px) rotate(0.8deg);
+  }
 }
 
 /* Envelope Interactive Container */
 .envelope-interactive {
   position: relative;
   width: min(88vw, 330px);
-  aspect-ratio: 4 / 2.75; /* Standard chic greeting card envelope ratio */
+  aspect-ratio: 4 / 2.75;
+  /* Standard chic greeting card envelope ratio */
   cursor: pointer;
   perspective: 1000px;
   outline: none;
@@ -331,12 +444,27 @@ html, body {
   border-radius: 10px;
   z-index: 3;
   pointer-events: none;
-  /* Created via CSS clip-path triangles simulating folded paper */
-  background: 
-    linear-gradient(to top right, var(--envelope-wine-light) 50%, transparent 50%) left / 50% 100% no-repeat,
-    linear-gradient(to top left, var(--envelope-wine-light) 50%, transparent 50%) right / 50% 100% no-repeat,
-    linear-gradient(to top, var(--envelope-wine) 0%, var(--envelope-wine-dark) 100%) bottom / 100% 55% no-repeat;
-  filter: drop-shadow(0 -2px 3px rgba(0, 0, 0, 0.08));
+  overflow: hidden;
+  clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+  background: var(--envelope-wine-light);
+}
+
+.envelope-pocket::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--envelope-wine-light) 0%, var(--envelope-wine) 100%);
+  clip-path: polygon(0 0, 53% 50%, 0 100%);
+  filter: drop-shadow(2px 0 3px rgba(0, 0, 0, 0.15));
+}
+
+.envelope-pocket::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--envelope-wine-dark) 0%, var(--envelope-wine) 100%);
+  clip-path: polygon(0 100%, 100% 100%, 50% 46%);
+  filter: drop-shadow(0 -3px 4px rgba(0, 0, 0, 0.2));
 }
 
 /* Top Triangular Flap */
@@ -345,19 +473,19 @@ html, body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 56%;
+  height: 58%;
   background: linear-gradient(180deg, var(--envelope-wine-light) 0%, var(--envelope-wine) 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 50% 100%, 0 8px);
   transform-origin: top center;
   z-index: 5;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.22));
 }
 
 /* Center Wax Seal (Con dấu sáp đỏ niêm phong) */
 .wax-seal {
   position: absolute;
-  top: 54%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 58px;
@@ -419,6 +547,54 @@ html, body {
   margin-top: 18px;
   font-style: italic;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* Envelope Name Tag */
+.envelope-nametag {
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  background: #ffffff;
+  color: var(--envelope-wine);
+  font-family: 'Patrick Hand', cursive, sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 4px 14px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(120, 20, 45, 0.22);
+  border: 1.5px dashed #ea5b7c;
+  transform: rotate(3deg);
+  z-index: 8;
+  animation: nametagWiggle 3s ease-in-out infinite alternate;
+}
+
+@keyframes nametagWiggle {
+  0% { transform: rotate(3deg) translateY(0); }
+  100% { transform: rotate(1deg) translateY(-2px); }
+}
+
+/* Modal Guest Badge */
+.modal-guest-badge {
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
+  border: 1px solid #ffd4e2;
+  border-radius: 14px;
+  padding: 8px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--envelope-wine);
+  text-align: center;
+  margin-bottom: 10px;
+  width: 100%;
+  animation: badgeSlideDown 0.3s ease;
+}
+
+@keyframes badgeSlideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-guest-badge strong {
+  color: #c2185b;
 }
 
 /* ==========================================================================
@@ -520,7 +696,7 @@ html, body {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 12px 14px;
+  padding: 12px 14px 16px;
   display: flex;
   flex-direction: column;
 }
@@ -578,7 +754,8 @@ html, body {
 }
 
 /* Card Image Wrappers */
-.invitation-image-wrap, .map-image-wrap {
+.invitation-image-wrap,
+.map-image-wrap {
   width: 100%;
   border-radius: 18px;
   overflow: hidden;
@@ -740,9 +917,17 @@ html, body {
 }
 
 @keyframes audioRipple {
-  0% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(233, 30, 99, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(233, 30, 99, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(233, 30, 99, 0);
+  }
 }
 
 .toast-popup {
